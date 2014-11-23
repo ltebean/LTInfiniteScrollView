@@ -7,14 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef enum ScrollDirection {
+    ScrollDirectionRight,
+    ScrollDirectionLeft,
+} ScrollDirection;
 
 @protocol LTInfiniteScrollViewDelegate <NSObject>
--(UIView*) viewAtIndex:(int)index reusingView:(UIView *)view;
+-(void) updateView:(UIView*) view atPercent:(CGFloat)percent withScrollDirection:(ScrollDirection)direction;
+@end
 
+@protocol LTInfiniteScrollViewDataSource <NSObject>
+-(UIView*) viewAtIndex:(int)index reusingView:(UIView *)view;
+-(int) totalViewCount;
+-(int) visibleViewCount;
 @end
 
 
 @interface LTInfiniteScrollView : UIView
+@property(nonatomic,weak) id<LTInfiniteScrollViewDataSource> dataSource;
 @property(nonatomic,weak) id<LTInfiniteScrollViewDelegate> delegate;
 -(void) reloadData;
 
