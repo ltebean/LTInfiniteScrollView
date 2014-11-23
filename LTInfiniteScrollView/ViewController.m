@@ -23,7 +23,7 @@
 {
     [super viewDidAppear:animated];
     
-    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), 64)];
+    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), 200)];
     [self.view addSubview:self.scrollView];
     self.scrollView.delegate = self;
     [self.scrollView reloadData];
@@ -32,12 +32,11 @@
 -(UIView*) viewAtIndex:(int)index reusingView:(UIView *)view;
 {
     if(view){
-        NSLog(@"reuse");
         ((UILabel*)view).text = [NSString stringWithFormat:@"%d", index];
         return view;
     }
     
-    UILabel *aView = [[UILabel alloc]init];
+    UILabel *aView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 64, 64)];
     aView.backgroundColor = [UIColor blackColor];
     aView.layer.cornerRadius = 32;
     aView.layer.masksToBounds = YES;
