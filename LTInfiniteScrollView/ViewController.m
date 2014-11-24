@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "LTInfiniteScrollView.h"
+
+
 @interface ViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
 @property (nonatomic,strong) LTInfiniteScrollView* scrollView;
 @end
@@ -25,13 +27,20 @@
     
     self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), 200)];
     [self.view addSubview:self.scrollView];
-    self.scrollView.delegate = self;
+    //self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
     [self.scrollView reloadData];
 }
 
 - (IBAction)reload:(id)sender {
+    self.scrollView.delegate = nil;
     [self.scrollView reloadData];
+}
+
+- (IBAction)reloadWithFancyEffect:(id)sender {
+    self.scrollView.delegate = self;
+    [self.scrollView reloadData];
+
 }
 
 -(int) totalViewCount
@@ -52,18 +61,20 @@
     
     UILabel *aView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 64, 64)];
     aView.backgroundColor = [UIColor blackColor];
-    aView.layer.cornerRadius = 32;
+    aView.layer.cornerRadius = 64 / 2;
     aView.layer.masksToBounds = YES;
 
+    aView.backgroundColor = [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1];
+    
     aView.textColor = [UIColor whiteColor];
     aView.textAlignment = NSTextAlignmentCenter;
     aView.text = [NSString stringWithFormat:@"%d", index];
     return aView;
 }
 
--(void) updateView:(UIView*) view atPercent:(CGFloat)percent withScrollDirection:(ScrollDirection)direction
+-(void) updateView:(UIView*) view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction
 {
-    
+    CGFloat percent = distance/64;
     if(view.tag == 1){
         // NSLog(@"%f",percent);
     }

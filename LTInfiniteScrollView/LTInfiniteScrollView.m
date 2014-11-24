@@ -67,6 +67,10 @@
     int end = ceil(self.visibleViewCount/2.0f);
     self.currentIndex = 0;
     
+    self.scrollView.contentOffset = CGPointMake(self.totalWidth/2-CGRectGetWidth(self.bounds)/2, 0);
+
+    CGFloat currentCenter = [self currentCenter].x;
+
     for(int i = begin; i<=end;i++){
         UIView* view = [self.dataSource viewAtIndex:i reusingView:nil];
         view.center = [self centerForViewAtIndex:i];
@@ -74,10 +78,9 @@
         [self.views addObject:view];
         
         [self.scrollView addSubview:view];
-        [self.delegate updateView:view atPercent:0 withScrollDirection:ScrollDirectionLeft];
+        [self.delegate updateView:view withDistanceToCenter:(view.center.x - currentCenter) scrollDirection:self.scrollDirection];
     }
-    self.scrollView.contentOffset = CGPointMake(self.totalWidth/2-CGRectGetWidth(self.bounds)/2, 0);
-
+   
 }
 
 -(CGPoint) centerForViewAtIndex:(int) index
@@ -115,8 +118,7 @@
         };
         
         CGFloat currentCenter = [self currentCenter].x;
-        CGFloat percent = (view.center.x - currentCenter) / self.viewSize.width;
-        [self.delegate updateView:view atPercent:percent withScrollDirection:self.scrollDirection];
+        [self.delegate updateView:view withDistanceToCenter:(view.center.x - currentCenter) scrollDirection:self.scrollDirection];
 
     }
     if(self.dragging){

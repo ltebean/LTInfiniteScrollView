@@ -13,7 +13,7 @@ typedef enum ScrollDirection {
 } ScrollDirection;
 
 @protocol LTInfiniteScrollViewDelegate <NSObject>
--(void) updateView:(UIView*) view atPercent:(CGFloat)percent withScrollDirection:(ScrollDirection)direction;
+-(void) updateView:(UIView*) view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction;
 @end
 
 @protocol LTInfiniteScrollViewDataSource <NSObject>
