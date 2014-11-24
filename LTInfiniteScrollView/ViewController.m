@@ -74,7 +74,7 @@
 
 -(void) updateView:(UIView*) view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction
 {
-    CGFloat percent = distance/64;
+    CGFloat percent = distance/CGRectGetWidth(self.view.bounds)*5;
     if(view.tag == 1){
         // NSLog(@"%f",percent);
     }
@@ -82,7 +82,6 @@
     CATransform3D transform = CATransform3DIdentity;
     
     // scale
-    CGFloat angle =  180.0f * M_PI / 180.0f*percent;
     CGFloat scale = 1.6 - 0.3*fabs(percent);
     transform = CATransform3DScale(transform, scale, scale, scale);
     
@@ -92,6 +91,7 @@
     
     // rotate
     if(fabs(percent)<1){
+        CGFloat angle =  M_PI * percent;
         transform.m34 = 1.0/-600;
         transform = CATransform3DRotate(transform, angle , 0.0f, 1.0f, 0.0f);
     }
