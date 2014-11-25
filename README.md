@@ -1,4 +1,4 @@
-![LTInfiniteScrollView](https://raw.githubusercontent.com/ltebean/LTInfiniteScrollView/master/demo.gif)
+![LTInfiniteScrollView](https://raw.githubusercontent.com/ltebean/LTInfiniteScrollView/master/image/demo.gif)
 
 ## Usage
 

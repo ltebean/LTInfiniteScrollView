@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "LTInfiniteScrollView.h"
 
+#define color [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 
 @interface ViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
 @property (nonatomic,strong) LTInfiniteScrollView* scrollView;
@@ -27,7 +28,7 @@
     
     self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), 200)];
     [self.view addSubview:self.scrollView];
-    //self.scrollView.delegate = self;
+    self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
     [self.scrollView reloadData];
 }
@@ -62,9 +63,7 @@
     aView.backgroundColor = [UIColor blackColor];
     aView.layer.cornerRadius = 64 / 2;
     aView.layer.masksToBounds = YES;
-
-    aView.backgroundColor = [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1];
-    
+    aView.backgroundColor = color;
     aView.textColor = [UIColor whiteColor];
     aView.textAlignment = NSTextAlignmentCenter;
     aView.text = [NSString stringWithFormat:@"%d", index];
@@ -75,7 +74,7 @@
 {
     CGFloat percent = distance/CGRectGetWidth(self.view.bounds)*5;
     if(view.tag == 1){
-        // NSLog(@"%f",percent);
+         NSLog(@"%f",percent);
     }
     
     CATransform3D transform = CATransform3DIdentity;
@@ -89,14 +88,50 @@
     transform = CATransform3DTranslate(transform,translate, 0, 0);
     
     // rotate
-    if(fabs(percent)<1){
-        CGFloat angle =  M_PI * percent;
+    if(fabs(percent) < 1){
+        CGFloat angle = 0;
+        angle =  M_PI * (1-fabs(percent));
         transform.m34 = 1.0/-600;
+        if(fabs(percent) <= 0.5){
+            angle =  M_PI * (fabs(percent));
+            UILabel *label = (UILabel*) view;
+            label.text = @"back";
+            label.backgroundColor = [UIColor darkGrayColor];
+        }else{
+            UILabel *label = (UILabel*) view;
+            label.text = [NSString stringWithFormat:@"%d",(int)view.tag];
+            label.backgroundColor = color;
+        }
         transform = CATransform3DRotate(transform, angle , 0.0f, 1.0f, 0.0f);
+    }else{
+        UILabel *label = (UILabel*) view;
+        label.text = [NSString stringWithFormat:@"%d",(int)view.tag];
+        label.backgroundColor = color;
     }
 
     view.layer.transform = transform;
         
+}
+
+-(void) configureForegroundOfLabel:(UILabel*) label
+{
+    NSString* text = [NSString stringWithFormat:@"%d",(int)label.tag];
+    if([label.text isEqualToString:text]){
+        return;
+    }
+    label.text = text;
+    label.backgroundColor = color;
+}
+
+-(void) configureBackgroundOfLabel:(UILabel*) label
+{
+    NSString* text = @"back";
+    if([label.text isEqualToString:text]){
+        return;
+    }
+    label.text = text;
+    label.backgroundColor = [UIColor blackColor];
+
 }
 
 
