@@ -35,6 +35,15 @@
     return self;
 }
 
+-(instancetype) initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
 -(void) setup
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds))];
@@ -81,6 +90,11 @@
         [self.delegate updateView:view withDistanceToCenter:(view.center.x - currentCenter) scrollDirection:self.scrollDirection];
     }
    
+}
+
+-(void) scrollToIndex:(int) index
+{
+    [self.scrollView setContentOffset:[self contentOffsetForIndex:index] animated:YES];
 }
 
 -(CGPoint) centerForViewAtIndex:(int) index

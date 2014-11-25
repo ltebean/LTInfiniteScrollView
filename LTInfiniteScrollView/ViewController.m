@@ -40,7 +40,6 @@
 - (IBAction)reloadWithFancyEffect:(id)sender {
     self.scrollView.delegate = self;
     [self.scrollView reloadData];
-
 }
 
 -(int) totalViewCount
@@ -97,8 +96,7 @@
     }
 
     view.layer.transform = transform;
-    
-    
+        
 }
 
 
