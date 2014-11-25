@@ -28,7 +28,7 @@
     
     self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), 200)];
     [self.view addSubview:self.scrollView];
-    self.scrollView.delegate = self;
+    //self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
     [self.scrollView reloadData];
 }
