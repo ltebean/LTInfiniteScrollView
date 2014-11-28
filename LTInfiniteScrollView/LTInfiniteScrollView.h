@@ -24,9 +24,13 @@ typedef enum ScrollDirection {
 
 
 @interface LTInfiniteScrollView : UIView
+@property(nonatomic) int currentIndex;
 @property(nonatomic,weak) id<LTInfiniteScrollViewDataSource> dataSource;
 @property(nonatomic,weak) id<LTInfiniteScrollViewDelegate> delegate;
+@property(nonatomic) BOOL scrollEnabled;
 -(void) reloadData;
 -(void) scrollToIndex:(int) index;
+-(UIView*) viewAtIndex:(int) index;
+
 
 @end

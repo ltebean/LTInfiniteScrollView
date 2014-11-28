@@ -10,9 +10,10 @@
 #import "LTInfiniteScrollView.h"
 
 #define color [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
-
+#define scrollViewHeight 400
 @interface ViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
 @property (nonatomic,strong) LTInfiniteScrollView* scrollView;
+@property (nonatomic) CGFloat viewSize;
 @end
 
 @implementation ViewController
@@ -22,15 +23,58 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
--(void) viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
-    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), 200)];
+    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), scrollViewHeight)];
     [self.view addSubview:self.scrollView];
-    //self.scrollView.delegate = self;
+    self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
+    
+    self.viewSize = CGRectGetWidth(self.view.bounds) / 5.0f;
     [self.scrollView reloadData];
+    
+    UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+    [self.scrollView addGestureRecognizer:recognizer];
+}
+
+-(void) handlePan:(UIPanGestureRecognizer*) recognizer
+{
+    CGPoint translation = [recognizer translationInView:self.scrollView];
+    
+    int centerIndex = self.scrollView.currentIndex;
+    NSArray* indexNeeded = @[[NSNumber numberWithInt:centerIndex-2],[NSNumber numberWithInt:centerIndex-1],[NSNumber numberWithInt:centerIndex],[NSNumber numberWithInt:centerIndex+1],[NSNumber numberWithInt:centerIndex+2]];
+    NSMutableArray* views = [NSMutableArray array];
+
+    for (NSNumber *index in indexNeeded){
+        UIView* view = [self.scrollView viewAtIndex:[index intValue]];
+        [views addObject:view];
+    }
+    
+    for (int i = 0; i< views.count;i++) {
+        UIView* view = views[i];
+        CGPoint center = view.center;
+        center.y = center.y + translation.y * (1-fabs(i-2)*0.25);
+        if(center.y< (scrollViewHeight-70) && center.y > 70){
+            view.center = center;
+        }
+    }
+    
+    [recognizer setTranslation:CGPointZero inView:self.scrollView];
+    
+    [self.scrollView scrollToIndex:self.scrollView.currentIndex];
+    self.scrollView.scrollEnabled = NO;
+    if(recognizer.state == UIGestureRecognizerStateEnded){
+        [UIView animateWithDuration:0.6 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:0 animations:^{
+            for (UIView* view in views) {
+                CGPoint center = view.center;
+                center.y = CGRectGetMidY(self.scrollView.bounds);
+                view.center = center;
+            }
+        } completion:^(BOOL finished) {
+            self.scrollView.scrollEnabled = YES;
+        }];
+    }
 }
 
 - (IBAction)reload:(id)sender {
@@ -47,6 +91,7 @@
 {
     return 1000000000;
 }
+
 -(int) visibleViewCount
 {
     return 5;
@@ -59,9 +104,9 @@
         return view;
     }
     
-    UILabel *aView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 64, 64)];
+    UILabel *aView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.viewSize, self.viewSize)];
     aView.backgroundColor = [UIColor blackColor];
-    aView.layer.cornerRadius = 64 / 2;
+    aView.layer.cornerRadius = self.viewSize/2.0f;
     aView.layer.masksToBounds = YES;
     aView.backgroundColor = color;
     aView.textColor = [UIColor whiteColor];
@@ -74,17 +119,27 @@
 {
     CGFloat percent = distance/CGRectGetWidth(self.view.bounds)*5;
     if(view.tag == 1){
-         NSLog(@"%f",percent);
+         //NSLog(@"%f",percent);
     }
     
     CATransform3D transform = CATransform3DIdentity;
     
     // scale
-    CGFloat scale = 1.6 - 0.3*fabs(percent);
-    transform = CATransform3DScale(transform, scale, scale, scale);
+    CGFloat size = self.viewSize;
+    CGPoint center = view.center;
+    view.center = center;
+    size = size * (1.4-0.3*(fabs(percent)));
+    view.frame = CGRectMake(0, 0, size, size);
+    view.layer.cornerRadius = size/2;
+    view.center = center;
     
     // translate
-    CGFloat translate = 16 * percent;
+    CGFloat translate = self.viewSize/3 * percent;
+    if(percent >1){
+        translate = self.viewSize/3;
+    }else if(percent < -1){
+        translate = -self.viewSize/3;
+    }
     transform = CATransform3DTranslate(transform,translate, 0, 0);
     
     // rotate

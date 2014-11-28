@@ -18,7 +18,6 @@
 @property(nonatomic) int totalViewCount;
 @property(nonatomic) CGFloat preContentOffsetX;
 @property(nonatomic) CGFloat totalWidth;
-@property int currentIndex;
 @property BOOL dragging;
 @property ScrollDirection scrollDirection;
 @end
@@ -50,6 +49,12 @@
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.delegate = self;
     [self addSubview: self.scrollView];
+}
+
+-(void) setScrollEnabled:(BOOL)scrollEnabled
+{
+    _scrollEnabled = scrollEnabled;
+    self.scrollView.scrollEnabled = scrollEnabled;
 }
 
 -(void) reloadData
@@ -89,12 +94,22 @@
         [self.scrollView addSubview:view];
         [self.delegate updateView:view withDistanceToCenter:(view.center.x - currentCenter) scrollDirection:self.scrollDirection];
     }
-   
 }
 
 -(void) scrollToIndex:(int) index
 {
     [self.scrollView setContentOffset:[self contentOffsetForIndex:index] animated:YES];
+}
+
+-(UIView*) viewAtIndex:(int) index
+{
+    CGPoint center = [self centerForViewAtIndex:index];
+    for (UIView* view in self.views) {
+        if(fabs(center.x - view.center.x) <= self.viewSize.width/2.0f){
+            return view;
+        }
+    }
+    return nil;
 }
 
 -(CGPoint) centerForViewAtIndex:(int) index
