@@ -11,6 +11,7 @@
 
 #define color [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 #define scrollViewHeight 400
+
 @interface ViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
 @property (nonatomic,strong) LTInfiniteScrollView* scrollView;
 @property (nonatomic) CGFloat viewSize;
@@ -28,7 +29,7 @@
     
     self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), scrollViewHeight)];
     [self.view addSubview:self.scrollView];
-    self.scrollView.delegate = self;
+    //self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
     
     self.viewSize = CGRectGetWidth(self.view.bounds) / 5.0f;
@@ -145,10 +146,14 @@
     // rotate
     if(fabs(percent) < 1){
         CGFloat angle = 0;
-        angle =  M_PI * (1-fabs(percent));
+        if(percent>0){
+            angle = - M_PI * (1-fabs(percent));
+        }else{
+            angle =  M_PI * (1-fabs(percent));
+        }
         transform.m34 = 1.0/-600;
         if(fabs(percent) <= 0.5){
-            angle =  M_PI * (fabs(percent));
+            angle =  M_PI * percent;
             UILabel *label = (UILabel*) view;
             label.text = @"back";
             label.backgroundColor = [UIColor darkGrayColor];
