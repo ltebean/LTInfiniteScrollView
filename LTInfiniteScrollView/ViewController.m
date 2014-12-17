@@ -33,6 +33,7 @@
     self.scrollView.dataSource = self;
     self.scrollView.pagingEnabled= NO;
     
+    
     self.viewSize = CGRectGetWidth(self.view.bounds) / 5.0f;
     [self.scrollView reloadData];
     

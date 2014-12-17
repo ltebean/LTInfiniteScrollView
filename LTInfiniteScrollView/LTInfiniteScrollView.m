@@ -31,7 +31,14 @@
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds))];
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.delegate = self;
+    self.scrollView.pagingEnabled = self.pagingEnabled;
     [self addSubview: self.scrollView];
+}
+
+-(void) setPagingEnabled:(BOOL)pagingEnabled
+{
+    _pagingEnabled = pagingEnabled;
+    self.scrollView.pagingEnabled = pagingEnabled;
 }
 
 -(void) setScrollEnabled:(BOOL)scrollEnabled
