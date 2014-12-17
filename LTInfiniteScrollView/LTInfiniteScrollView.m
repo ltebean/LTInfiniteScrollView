@@ -19,29 +19,12 @@
 @property(nonatomic) CGFloat preContentOffsetX;
 @property(nonatomic) CGFloat totalWidth;
 @property BOOL dragging;
+@property BOOL initialized;
 @property ScrollDirection scrollDirection;
 @end
 
 
 @implementation LTInfiniteScrollView
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setup];
-    }
-    return self;
-}
-
--(instancetype) initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self setup];
-    }
-    return self;
-}
 
 -(void) setup
 {
@@ -59,6 +42,10 @@
 
 -(void) reloadData
 {
+    if(!self.initialized){
+        [self setup];
+        self.initialized = YES;
+    }
     
     for(UIView* view in self.views){
         [view removeFromSuperview];
@@ -70,21 +57,21 @@
     CGFloat viewWidth = CGRectGetWidth(self.bounds)/self.visibleViewCount;
     CGFloat viewHeight = CGRectGetHeight(self.bounds);
     self.viewSize = CGSizeMake(viewWidth, viewHeight);
-
+    
     self.totalWidth = viewWidth*self.totalViewCount;
     
     self.scrollView.contentSize=CGSizeMake(self.totalWidth, CGRectGetHeight(self.bounds));
-   
+    
     self.views = [NSMutableArray array];
-
+    
     int begin = -ceil(self.visibleViewCount/2.0f);
     int end = ceil(self.visibleViewCount/2.0f);
     self.currentIndex = 0;
     
     self.scrollView.contentOffset = CGPointMake(self.totalWidth/2-CGRectGetWidth(self.bounds)/2, 0);
-
+    
     CGFloat currentCenter = [self currentCenter].x;
-
+    
     for(int i = begin; i<=end;i++){
         UIView* view = [self.dataSource viewAtIndex:i reusingView:nil];
         view.center = [self centerForViewAtIndex:i];
@@ -112,11 +99,16 @@
     return nil;
 }
 
+-(NSArray*) allViews
+{
+    return self.views;
+}
+
 -(CGPoint) centerForViewAtIndex:(int) index
 {
     CGFloat y = CGRectGetMidY(self.bounds);
     CGFloat x = self.totalWidth/2 + index*self.viewSize.width;
-//    NSLog(@"view center:%f at index:%d",x,index);
+    //    NSLog(@"view center:%f at index:%d",x,index);
     return CGPointMake(x, y);
 }
 
@@ -125,7 +117,7 @@
     CGFloat offset = [self currentCenter].x - self.totalWidth/2 ;
     self.currentIndex = ceil((offset- self.viewSize.width/2)/self.viewSize.width);
     
-//    NSLog(@"--------------------------------");
+    //    NSLog(@"--------------------------------");
     for (UIView* view in self.views) {
         if([self viewCanBeQueuedForReuse:view]){
             int indexNeeded;
@@ -135,11 +127,11 @@
             }else{
                 indexNeeded = indexOfViewToReuse - (self.visibleViewCount + 2);
             }
-
+            
             //NSLog(@"index:%d indexNeeded:%d",indexOfViewToReuse,indexNeeded);
             
             [view removeFromSuperview];
-
+            
             UIView* viewNeeded = [self.dataSource viewAtIndex:indexNeeded reusingView:view];
             viewNeeded.center = [self centerForViewAtIndex:indexNeeded];
             [self.scrollView addSubview:viewNeeded];
@@ -148,7 +140,7 @@
         
         CGFloat currentCenter = [self currentCenter].x;
         [self.delegate updateView:view withDistanceToCenter:(view.center.x - currentCenter) scrollDirection:self.scrollDirection];
-
+        
     }
     if(self.dragging){
         if(self.scrollView.contentOffset.x > self.preContentOffsetX){
@@ -174,7 +166,7 @@
     
     CGFloat distanceToCenter = [self currentCenter].x - view.center.x;
     CGFloat threshold = (ceil(self.visibleViewCount/2.0f))*self.viewSize.width + self.viewSize.width/2.0f;
-
+    
     if(self.scrollDirection == ScrollDirectionLeft){
         if(distanceToCenter <0){
             return NO;
@@ -188,7 +180,6 @@
         return YES;
     }
     return NO;
-    
 }
 
 -(void) scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -199,19 +190,21 @@
 -(void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     self.dragging = NO;
-    [self.scrollView setContentOffset:[self contentOffsetForIndex:self.currentIndex] animated:YES];
+    if(!self.pagingEnabled){
+        [self.scrollView setContentOffset:[self contentOffsetForIndex:self.currentIndex] animated:YES];
+    }
 }
 
 -(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [self.scrollView setContentOffset:[self contentOffsetForIndex:self.currentIndex] animated:YES];
-
+    if(!self.pagingEnabled){
+        [self.scrollView setContentOffset:[self contentOffsetForIndex:self.currentIndex] animated:YES];
+    }
 }
 
 -(CGPoint) contentOffsetForIndex:(int) index
 {
     CGFloat x = self.totalWidth/2 + index*self.viewSize.width - CGRectGetWidth(self.bounds)/2;
-
     return CGPointMake(x, 0);
 }
 

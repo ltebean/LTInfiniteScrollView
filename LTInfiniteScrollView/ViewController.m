@@ -31,6 +31,7 @@
     [self.view addSubview:self.scrollView];
     //self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
+    self.scrollView.pagingEnabled= NO;
     
     self.viewSize = CGRectGetWidth(self.view.bounds) / 5.0f;
     [self.scrollView reloadData];
@@ -90,7 +91,7 @@
 
 -(int) totalViewCount
 {
-    return 1000000000;
+    return 99999;
 }
 
 -(int) visibleViewCount
