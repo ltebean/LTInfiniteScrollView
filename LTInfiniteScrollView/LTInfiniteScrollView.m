@@ -92,6 +92,7 @@
 
 -(void) scrollToIndex:(int) index
 {
+    self.dragging = YES;
     [self.scrollView setContentOffset:[self contentOffsetForIndex:index] animated:YES];
 }
 
