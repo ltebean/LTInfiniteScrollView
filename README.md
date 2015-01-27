@@ -13,29 +13,29 @@ self.scrollView.dataSource = self;
 Then implement `LTInfiniteScrollViewDataSource` protocol:
 ```objective-c
 @protocol LTInfiniteScrollViewDataSource <NSObject>
--(UIView*) viewAtIndex:(int)index reusingView:(UIView *)view;
--(int) totalViewCount;
--(int) visibleViewCount;
+- (UIView *)viewAtIndex:(int)index reusingView:(UIView *)view;
+- (int)totalViewCount;
+- (int)visibleViewCount;
 @end
 ```
 
 Sample code:
 ```objective-c
--(int) totalViewCount
+- (int)totalViewCount
 {
     // you can set it to a very big number to mimic the infinite behavior, no performance issue here
-    return 100000000; 
+    return 9999; 
 }
 
--(int) visibleViewCount
+- (int)visibleViewCount
 {
     return 5;
 }
 
--(UIView*) viewAtIndex:(int)index reusingView:(UIView *)view;
+- (UIView *)viewAtIndex:(int)index reusingView:(UIView *)view;
 {
-    if(view){
-        ((UILabel*)view).text = [NSString stringWithFormat:@"%d", index];
+    if (view) {
+        ((UILabel *)view).text = [NSString stringWithFormat:@"%d", index];
         return view;
     }
     
@@ -51,10 +51,19 @@ Sample code:
 }
 ```
 
+Instance methods in `LTInfinitedScrollView`:
+
+```objective-c
+- (void)reloadData;
+- (void)scrollToIndex:(int)index animated:(BOOL)animated;
+- (UIView *)viewAtIndex:(int)index;
+- (NSArray *)allViews;
+```
+
 If you want to apply any animation during scrolling, implement `LTInfiniteScrollViewDelegate` protocol: 
 ```objective-c
 @protocol LTInfiniteScrollViewDelegate <NSObject>
--(void) updateView:(UIView*) view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction;
+- (void)updateView:(UIView *)view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction;
 @end
 ```
 See the example for details~ 

@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
--(void) viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), scrollViewHeight)];
@@ -41,21 +41,21 @@
     [self.scrollView addGestureRecognizer:recognizer];
 }
 
--(void) handlePan:(UIPanGestureRecognizer*) recognizer
+-(void)handlePan:(UIPanGestureRecognizer*)recognizer
 {
     CGPoint translation = [recognizer translationInView:self.scrollView];
     
     int centerIndex = self.scrollView.currentIndex;
-    NSArray* indexNeeded = @[[NSNumber numberWithInt:centerIndex-2],[NSNumber numberWithInt:centerIndex-1],[NSNumber numberWithInt:centerIndex],[NSNumber numberWithInt:centerIndex+1],[NSNumber numberWithInt:centerIndex+2]];
+    NSArray* indexNeeded = @[@(centerIndex-2),@(centerIndex-1),@(centerIndex),@(centerIndex+1),@(centerIndex+2)];
     NSMutableArray* views = [NSMutableArray array];
 
     for (NSNumber *index in indexNeeded){
-        UIView* view = [self.scrollView viewAtIndex:[index intValue]];
+        UIView *view = [self.scrollView viewAtIndex:[index intValue]];
         [views addObject:view];
     }
     
-    for (int i = 0; i< views.count;i++) {
-        UIView* view = views[i];
+    for (int i = 0; i < views.count;i++) {
+        UIView *view = views[i];
         CGPoint center = view.center;
         center.y = center.y + translation.y * (1-fabs(i-2)*0.25);
         if(center.y< (scrollViewHeight-70) && center.y > 70){
@@ -65,11 +65,11 @@
     
     [recognizer setTranslation:CGPointZero inView:self.scrollView];
     
-    [self.scrollView scrollToIndex:self.scrollView.currentIndex];
+    [self.scrollView scrollToIndex:self.scrollView.currentIndex animated:YES];
     self.scrollView.scrollEnabled = NO;
     if(recognizer.state == UIGestureRecognizerStateEnded){
         [UIView animateWithDuration:0.6 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:0 animations:^{
-            for (UIView* view in views) {
+            for (UIView *view in views) {
                 CGPoint center = view.center;
                 center.y = CGRectGetMidY(self.scrollView.bounds);
                 view.center = center;
@@ -90,19 +90,19 @@
     [self.scrollView reloadData];
 }
 
--(int) totalViewCount
+- (int)totalViewCount
 {
-    return 99999;
+    return 999;
 }
 
--(int) visibleViewCount
+- (int)visibleViewCount
 {
     return 5;
 }
 
--(UIView*) viewAtIndex:(int)index reusingView:(UIView *)view;
+- (UIView *)viewAtIndex:(int)index reusingView:(UIView *)view;
 {
-    if(view){
+    if (view) {
         ((UILabel*)view).text = [NSString stringWithFormat:@"%d", index];
         return view;
     }
@@ -118,10 +118,10 @@
     return aView;
 }
 
--(void) updateView:(UIView*) view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction
+- (void)updateView:(UIView *)view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction
 {
     CGFloat percent = distance/CGRectGetWidth(self.view.bounds)*5;
-    if(view.tag == 1){
+    if( view.tag == 1) {
          //NSLog(@"%f",percent);
     }
     
@@ -138,35 +138,36 @@
     
     // translate
     CGFloat translate = self.viewSize/3 * percent;
-    if(percent >1){
+    if (percent > 1) {
         translate = self.viewSize/3;
-    }else if(percent < -1){
+    } else if (percent < -1) {
         translate = -self.viewSize/3;
     }
+    
     transform = CATransform3DTranslate(transform,translate, 0, 0);
     
     // rotate
-    if(fabs(percent) < 1){
+    if (fabs(percent) < 1) {
         CGFloat angle = 0;
-        if(percent>0){
+        if( percent > 0) {
             angle = - M_PI * (1-fabs(percent));
-        }else{
+        } else {
             angle =  M_PI * (1-fabs(percent));
         }
         transform.m34 = 1.0/-600;
-        if(fabs(percent) <= 0.5){
+        if (fabs(percent) <= 0.5) {
             angle =  M_PI * percent;
             UILabel *label = (UILabel*) view;
             label.text = @"back";
             label.backgroundColor = [UIColor darkGrayColor];
-        }else{
+        } else {
             UILabel *label = (UILabel*) view;
             label.text = [NSString stringWithFormat:@"%d",(int)view.tag];
             label.backgroundColor = color;
         }
         transform = CATransform3DRotate(transform, angle , 0.0f, 1.0f, 0.0f);
-    }else{
-        UILabel *label = (UILabel*) view;
+    } else {
+        UILabel *label = (UILabel *)view;
         label.text = [NSString stringWithFormat:@"%d",(int)view.tag];
         label.backgroundColor = color;
     }
@@ -175,32 +176,23 @@
         
 }
 
--(void) configureForegroundOfLabel:(UILabel*) label
+- (void)configureForegroundOfLabel:(UILabel *)label
 {
     NSString* text = [NSString stringWithFormat:@"%d",(int)label.tag];
-    if([label.text isEqualToString:text]){
+    if ([label.text isEqualToString:text]) {
         return;
     }
     label.text = text;
     label.backgroundColor = color;
 }
 
--(void) configureBackgroundOfLabel:(UILabel*) label
+- (void)configureBackgroundOfLabel:(UILabel *)label
 {
     NSString* text = @"back";
-    if([label.text isEqualToString:text]){
+    if ([label.text isEqualToString:text]) {
         return;
     }
     label.text = text;
     label.backgroundColor = [UIColor blackColor];
-
 }
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

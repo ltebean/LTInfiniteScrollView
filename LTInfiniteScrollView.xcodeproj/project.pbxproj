@@ -364,6 +364,7 @@
 				INFOPLIST_FILE = LTInfiniteScrollView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "04edb1eb-b86c-4e2a-9f43-ce7d9945b0e0";
 			};
 			name = Debug;
 		};
@@ -374,6 +375,7 @@
 				INFOPLIST_FILE = LTInfiniteScrollView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "04edb1eb-b86c-4e2a-9f43-ce7d9945b0e0";
 			};
 			name = Release;
 		};
@@ -430,6 +432,7 @@
 				FA7239F41A1ED83200CB0BF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FA7239F51A1ED83200CB0BF9 /* Build configuration list for PBXNativeTarget "LTInfiniteScrollViewTests" */ = {
 			isa = XCConfigurationList;
@@ -438,6 +441,7 @@
 				FA7239F71A1ED83200CB0BF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

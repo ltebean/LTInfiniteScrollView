@@ -13,27 +13,25 @@ typedef enum ScrollDirection {
 } ScrollDirection;
 
 @protocol LTInfiniteScrollViewDelegate <NSObject>
--(void) updateView:(UIView*) view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction;
+-(void)updateView:(UIView *)view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction;
 @end
 
 @protocol LTInfiniteScrollViewDataSource <NSObject>
--(UIView*) viewAtIndex:(int)index reusingView:(UIView *)view;
--(int) totalViewCount;
--(int) visibleViewCount;
+- (UIView *)viewAtIndex:(int)index reusingView:(UIView *)view;
+- (int)totalViewCount;
+- (int)visibleViewCount;
 @end
 
 
 @interface LTInfiniteScrollView : UIView
-@property(nonatomic) int currentIndex;
-@property(nonatomic,weak) id<LTInfiniteScrollViewDataSource> dataSource;
-@property(nonatomic,weak) id<LTInfiniteScrollViewDelegate> delegate;
-@property(nonatomic) BOOL scrollEnabled;
-@property(nonatomic) BOOL pagingEnabled;
+@property (nonatomic) int currentIndex;
+@property (nonatomic,weak) id<LTInfiniteScrollViewDataSource> dataSource;
+@property (nonatomic,weak) id<LTInfiniteScrollViewDelegate> delegate;
+@property (nonatomic) BOOL scrollEnabled;
+@property (nonatomic) BOOL pagingEnabled;
 
--(void) reloadData;
--(void) scrollToIndex:(int) index;
--(UIView*) viewAtIndex:(int) index;
--(NSArray*) allViews;
-
-
+- (void)reloadData;
+- (void)scrollToIndex:(int)index animated:(BOOL)animated;
+- (UIView *)viewAtIndex:(int)index;
+- (NSArray *)allViews;
 @end
