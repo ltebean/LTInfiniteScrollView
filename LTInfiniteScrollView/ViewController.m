@@ -9,11 +9,12 @@
 #import "ViewController.h"
 #import "LTInfiniteScrollView.h"
 
-#define color [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
-#define scrollViewHeight 400
+#define COLOR [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
+
+#define NUMBER_OF_VISIBLE_VIEWS 5
 
 @interface ViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
-@property (nonatomic,strong) LTInfiniteScrollView* scrollView;
+@property (nonatomic,strong) LTInfiniteScrollView *scrollView;
 @property (nonatomic) CGFloat viewSize;
 @end
 
@@ -27,59 +28,17 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), scrollViewHeight)];
+    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), 400)];
     [self.view addSubview:self.scrollView];
     //self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
     self.scrollView.pagingEnabled= NO;
     
-    
-    self.viewSize = CGRectGetWidth(self.view.bounds) / 5.0f;
+    self.viewSize = CGRectGetWidth(self.view.bounds) / NUMBER_OF_VISIBLE_VIEWS;
     [self.scrollView reloadData];
-    
-    UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
-    [self.scrollView addGestureRecognizer:recognizer];
 }
 
--(void)handlePan:(UIPanGestureRecognizer*)recognizer
-{
-    CGPoint translation = [recognizer translationInView:self.scrollView];
-    
-    int centerIndex = self.scrollView.currentIndex;
-    NSArray* indexNeeded = @[@(centerIndex-2),@(centerIndex-1),@(centerIndex),@(centerIndex+1),@(centerIndex+2)];
-    NSMutableArray* views = [NSMutableArray array];
-
-    for (NSNumber *index in indexNeeded){
-        UIView *view = [self.scrollView viewAtIndex:[index intValue]];
-        [views addObject:view];
-    }
-    
-    for (int i = 0; i < views.count;i++) {
-        UIView *view = views[i];
-        CGPoint center = view.center;
-        center.y = center.y + translation.y * (1-fabs(i-2)*0.25);
-        if(center.y< (scrollViewHeight-70) && center.y > 70){
-            view.center = center;
-        }
-    }
-    
-    [recognizer setTranslation:CGPointZero inView:self.scrollView];
-    
-    [self.scrollView scrollToIndex:self.scrollView.currentIndex animated:YES];
-    self.scrollView.scrollEnabled = NO;
-    if(recognizer.state == UIGestureRecognizerStateEnded){
-        [UIView animateWithDuration:0.6 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:0 animations:^{
-            for (UIView *view in views) {
-                CGPoint center = view.center;
-                center.y = CGRectGetMidY(self.scrollView.bounds);
-                view.center = center;
-            }
-        } completion:^(BOOL finished) {
-            self.scrollView.scrollEnabled = YES;
-        }];
-    }
-}
-
+# pragma mark - IBAction
 - (IBAction)reload:(id)sender {
     self.scrollView.delegate = nil;
     [self.scrollView reloadData];
@@ -90,20 +49,22 @@
     [self.scrollView reloadData];
 }
 
-- (int)totalViewCount
+# pragma mark - LTInfiniteScrollView dataSource
+- (NSInteger)numberOfViews
 {
     return 999;
 }
 
-- (int)visibleViewCount
+- (NSInteger)numberOfVisibleViews
 {
-    return 5;
+    return NUMBER_OF_VISIBLE_VIEWS;
 }
 
-- (UIView *)viewAtIndex:(int)index reusingView:(UIView *)view;
+# pragma mark - LTInfiniteScrollView delegate
+- (UIView *)viewAtIndex:(NSInteger)index reusingView:(UIView *)view;
 {
     if (view) {
-        ((UILabel*)view).text = [NSString stringWithFormat:@"%d", index];
+        ((UILabel*)view).text = [NSString stringWithFormat:@"%ld", index];
         return view;
     }
     
@@ -111,19 +72,18 @@
     aView.backgroundColor = [UIColor blackColor];
     aView.layer.cornerRadius = self.viewSize/2.0f;
     aView.layer.masksToBounds = YES;
-    aView.backgroundColor = color;
+    aView.backgroundColor = COLOR;
     aView.textColor = [UIColor whiteColor];
     aView.textAlignment = NSTextAlignmentCenter;
-    aView.text = [NSString stringWithFormat:@"%d", index];
+    aView.text = [NSString stringWithFormat:@"%ld", (long)index];
     return aView;
 }
 
 - (void)updateView:(UIView *)view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction
 {
-    CGFloat percent = distance/CGRectGetWidth(self.view.bounds)*5;
-    if( view.tag == 1) {
-         //NSLog(@"%f",percent);
-    }
+    // you can appy animations duration scrolling here
+    
+    CGFloat percent = distance / CGRectGetWidth(self.view.bounds) * NUMBER_OF_VISIBLE_VIEWS;
     
     CATransform3D transform = CATransform3DIdentity;
     
@@ -131,19 +91,18 @@
     CGFloat size = self.viewSize;
     CGPoint center = view.center;
     view.center = center;
-    size = size * (1.4-0.3*(fabs(percent)));
+    size = size * (1.4 - 0.3 * (fabs(percent)));
     view.frame = CGRectMake(0, 0, size, size);
-    view.layer.cornerRadius = size/2;
+    view.layer.cornerRadius = size / 2;
     view.center = center;
     
     // translate
-    CGFloat translate = self.viewSize/3 * percent;
+    CGFloat translate = self.viewSize / 3 * percent;
     if (percent > 1) {
-        translate = self.viewSize/3;
+        translate = self.viewSize / 3;
     } else if (percent < -1) {
-        translate = -self.viewSize/3;
+        translate = -self.viewSize / 3;
     }
-    
     transform = CATransform3DTranslate(transform,translate, 0, 0);
     
     // rotate
@@ -163,27 +122,28 @@
         } else {
             UILabel *label = (UILabel*) view;
             label.text = [NSString stringWithFormat:@"%d",(int)view.tag];
-            label.backgroundColor = color;
+            label.backgroundColor = COLOR;
         }
         transform = CATransform3DRotate(transform, angle , 0.0f, 1.0f, 0.0f);
     } else {
         UILabel *label = (UILabel *)view;
         label.text = [NSString stringWithFormat:@"%d",(int)view.tag];
-        label.backgroundColor = color;
+        label.backgroundColor = COLOR;
     }
 
     view.layer.transform = transform;
         
 }
 
+# pragma mark - config views
 - (void)configureForegroundOfLabel:(UILabel *)label
 {
-    NSString* text = [NSString stringWithFormat:@"%d",(int)label.tag];
+    NSString *text = [NSString stringWithFormat:@"%d",(int)label.tag];
     if ([label.text isEqualToString:text]) {
         return;
     }
     label.text = text;
-    label.backgroundColor = color;
+    label.backgroundColor = COLOR;
 }
 
 - (void)configureBackgroundOfLabel:(UILabel *)label

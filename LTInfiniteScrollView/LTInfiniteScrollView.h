@@ -17,21 +17,21 @@ typedef enum ScrollDirection {
 @end
 
 @protocol LTInfiniteScrollViewDataSource <NSObject>
-- (UIView *)viewAtIndex:(int)index reusingView:(UIView *)view;
-- (int)totalViewCount;
-- (int)visibleViewCount;
+- (UIView *)viewAtIndex:(NSInteger)index reusingView:(UIView *)view;
+- (NSInteger)numberOfViews;
+- (NSInteger)numberOfVisibleViews;
 @end
 
-
 @interface LTInfiniteScrollView : UIView
-@property (nonatomic) int currentIndex;
+@property (nonatomic) NSInteger currentIndex;
 @property (nonatomic,weak) id<LTInfiniteScrollViewDataSource> dataSource;
 @property (nonatomic,weak) id<LTInfiniteScrollViewDelegate> delegate;
 @property (nonatomic) BOOL scrollEnabled;
 @property (nonatomic) BOOL pagingEnabled;
+@property (nonatomic) NSInteger maxScrollDistance;
 
 - (void)reloadData;
-- (void)scrollToIndex:(int)index animated:(BOOL)animated;
-- (UIView *)viewAtIndex:(int)index;
+- (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated;
+- (UIView *)viewAtIndex:(NSInteger)index;
 - (NSArray *)allViews;
 @end
