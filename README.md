@@ -1,3 +1,6 @@
+![LTInfiniteScrollView](https://cocoapod-badges.herokuapp.com/v/LTInfiniteScrollView/badge.png)
+
+
 ![LTInfiniteScrollView](https://raw.githubusercontent.com/ltebean/LTInfiniteScrollView/master/image/demo.gif)
 
 ## Usage
