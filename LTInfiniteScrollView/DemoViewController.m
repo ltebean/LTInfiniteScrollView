@@ -6,19 +6,19 @@
 //  Copyright (c) 2014年 ltebean. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "DemoViewController.h"
 #import "LTInfiniteScrollView.h"
 
 #define COLOR [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 
 #define NUMBER_OF_VISIBLE_VIEWS 5
 
-@interface ViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
+@interface DemoViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
 @property (nonatomic,strong) LTInfiniteScrollView *scrollView;
 @property (nonatomic) CGFloat viewSize;
 @end
 
-@implementation ViewController
+@implementation DemoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,7 +28,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), 400)];
+    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 200, CGRectGetWidth(self.view.bounds), 200)];
     [self.view addSubview:self.scrollView];
     //self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
