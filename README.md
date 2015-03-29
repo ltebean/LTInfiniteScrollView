@@ -1,11 +1,11 @@
 ![LTInfiniteScrollView](https://cocoapod-badges.herokuapp.com/v/LTInfiniteScrollView/badge.png)
 
 ## Demo
-You can apply animation to each view during the scroll:
+#### 1. You can apply animation to each view during the scroll:
 ![LTInfiniteScrollView](https://raw.githubusercontent.com/ltebean/LTInfiniteScrollView/master/demo/demo.gif)
 
 
-The fancy menu can also be implemented in ten minutes with the support of this lib:
+#### 2. The fancy menu can also be implemented in ten minutes with the support of this lib:
 ![LTInfiniteScrollView](https://raw.githubusercontent.com/ltebean/LTInfiniteScrollView/master/demo/menu-demo.gif)
 
 ## Usage
