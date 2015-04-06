@@ -13,7 +13,7 @@
 @interface LTInfiniteScrollView()<UIScrollViewDelegate>
 @property (nonatomic) CGSize viewSize;
 @property (nonatomic,strong) UIScrollView *scrollView;
-@property (nonatomic,strong) NSMutableArray* views;
+@property (nonatomic,strong) NSMutableArray *views;
 @property (nonatomic) NSInteger visibleViewCount;
 @property (nonatomic) NSInteger totalViewCount;
 @property (nonatomic) CGFloat preContentOffsetX;
@@ -32,7 +32,7 @@
     self.scrollView.delegate = self;
     self.scrollView.clipsToBounds = NO;
     self.scrollView.pagingEnabled = self.pagingEnabled;
-    [self addSubview: self.scrollView];
+    [self addSubview:self.scrollView];
 }
 
 #pragma mark - public methods
@@ -77,7 +77,7 @@
     int end = ceil(self.visibleViewCount / 2.0f);
     self.currentIndex = 0;
     
-    self.scrollView.contentOffset = CGPointMake(self.totalWidth/2-CGRectGetWidth(self.bounds) / 2, 0);
+    self.scrollView.contentOffset = CGPointMake(self.totalWidth / 2-CGRectGetWidth(self.bounds) / 2, 0);
     
     CGFloat currentCenter = [self currentCenter].x;
     
@@ -100,7 +100,7 @@
 - (UIView *)viewAtIndex:(NSInteger)index
 {
     CGPoint center = [self centerForViewAtIndex:index];
-    for (UIView* view in self.views) {
+    for (UIView *view in self.views) {
         if (fabs(center.x - view.center.x) <= self.viewSize.width / 2.0f) {
             return view;
         }
@@ -116,11 +116,11 @@
 # pragma mark - UIScrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat offset = [self currentCenter].x - self.totalWidth/2 ;
-    self.currentIndex = ceil((offset- self.viewSize.width/2)/self.viewSize.width);
+    CGFloat offset = [self currentCenter].x - self.totalWidth / 2;
+    self.currentIndex = ceil((offset- self.viewSize.width / 2) / self.viewSize.width);
     
     //    NSLog(@"--------------------------------");
-    for (UIView* view in self.views) {
+    for (UIView *view in self.views) {
         if ([self viewCanBeQueuedForReuse:view]) {
             NSInteger indexNeeded;
             NSInteger indexOfViewToReuse = (NSInteger)view.tag;
@@ -134,7 +134,7 @@
             
             [view removeFromSuperview];
             
-            UIView* viewNeeded = [self.dataSource viewAtIndex:indexNeeded reusingView:view];
+            UIView *viewNeeded = [self.dataSource viewAtIndex:indexNeeded reusingView:view];
             viewNeeded.center = [self centerForViewAtIndex:indexNeeded];
             [self.scrollView addSubview:viewNeeded];
             viewNeeded.tag = indexNeeded;
@@ -145,9 +145,9 @@
         
     }
     if (self.dragging) {
-        if(self.scrollView.contentOffset.x > self.preContentOffsetX){
+        if (self.scrollView.contentOffset.x > self.preContentOffsetX) {
             self.scrollDirection = ScrollDirectionLeft;
-        }else{
+        } else {
             self.scrollDirection = ScrollDirectionRight;
         }
     }
@@ -213,12 +213,12 @@
     return CGPointMake(x, y);
 }
 
--(BOOL) viewCanBeQueuedForReuse:(UIView*) view
+- (BOOL)viewCanBeQueuedForReuse:(UIView *)view
 {
     CGFloat distanceToCenter = [self currentCenter].x - view.center.x;
     CGFloat threshold = (ceil(self.visibleViewCount/2.0f)) * self.viewSize.width + self.viewSize.width / 2.0f;
     if (self.scrollDirection == ScrollDirectionLeft) {
-        if(distanceToCenter < 0){
+        if (distanceToCenter < 0){
             return NO;
         }
     } else {
