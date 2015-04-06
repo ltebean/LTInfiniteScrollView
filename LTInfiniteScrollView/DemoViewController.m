@@ -23,12 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 200, CGRectGetWidth(self.view.bounds), 200)];
+        
+    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 200, [UIScreen mainScreen].bounds.size.width, 200)];
     [self.view addSubview:self.scrollView];
     //self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
@@ -103,7 +99,7 @@
     } else if (percent < -1) {
         translate = -self.viewSize / 3;
     }
-    transform = CATransform3DTranslate(transform,translate, 0, 0);
+    transform = CATransform3DTranslate(transform, translate, 0, 0);
     
     // rotate
     if (fabs(percent) < 1) {
@@ -116,18 +112,18 @@
         transform.m34 = 1.0/-600;
         if (fabs(percent) <= 0.5) {
             angle =  M_PI * percent;
-            UILabel *label = (UILabel*) view;
+            UILabel *label = (UILabel *)view;
             label.text = @"back";
             label.backgroundColor = [UIColor darkGrayColor];
         } else {
             UILabel *label = (UILabel*) view;
-            label.text = [NSString stringWithFormat:@"%d",(int)view.tag];
+            label.text = [NSString stringWithFormat:@"%d", (int)view.tag];
             label.backgroundColor = COLOR;
         }
         transform = CATransform3DRotate(transform, angle , 0.0f, 1.0f, 0.0f);
     } else {
         UILabel *label = (UILabel *)view;
-        label.text = [NSString stringWithFormat:@"%d",(int)view.tag];
+        label.text = [NSString stringWithFormat:@"%d", (int)view.tag];
         label.backgroundColor = COLOR;
     }
 
@@ -148,7 +144,7 @@
 
 - (void)configureBackgroundOfLabel:(UILabel *)label
 {
-    NSString* text = @"back";
+    NSString *text = @"back";
     if ([label.text isEqualToString:text]) {
         return;
     }
