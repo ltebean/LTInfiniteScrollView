@@ -144,12 +144,10 @@
         [self.delegate updateView:view withDistanceToCenter:(view.center.x - currentCenter) scrollDirection:self.scrollDirection];
         
     }
-    if (self.dragging) {
-        if (self.scrollView.contentOffset.x > self.preContentOffsetX) {
-            self.scrollDirection = ScrollDirectionLeft;
-        } else {
-            self.scrollDirection = ScrollDirectionRight;
-        }
+    if (self.scrollView.contentOffset.x > self.preContentOffsetX) {
+        self.scrollDirection = ScrollDirectionLeft;
+    } else {
+        self.scrollDirection = ScrollDirectionRight;
     }
     self.preContentOffsetX = self.scrollView.contentOffset.x;
 }
@@ -162,7 +160,7 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     self.dragging = NO;
-    if (!self.pagingEnabled) {
+    if (!self.pagingEnabled && !decelerate) {
         [self.scrollView setContentOffset:[self contentOffsetForIndex:self.currentIndex] animated:YES];
     }
 }

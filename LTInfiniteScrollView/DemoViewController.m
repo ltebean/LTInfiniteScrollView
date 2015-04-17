@@ -28,7 +28,7 @@
     [self.view addSubview:self.scrollView];
     //self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
-    self.scrollView.maxScrollDistance = 3;
+    self.scrollView.maxScrollDistance = 5;
     
     self.viewSize = CGRectGetWidth(self.view.bounds) / NUMBER_OF_VISIBLE_VIEWS;
     [self.scrollView reloadData];
