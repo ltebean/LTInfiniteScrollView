@@ -12,22 +12,40 @@
 
 @interface LTInfiniteScrollView()<UIScrollViewDelegate>
 @property (nonatomic) CGSize viewSize;
-@property (nonatomic,strong) UIScrollView *scrollView;
-@property (nonatomic,strong) NSMutableArray *views;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) NSMutableArray *views;
 @property (nonatomic) NSInteger visibleViewCount;
 @property (nonatomic) NSInteger totalViewCount;
 @property (nonatomic) CGFloat preContentOffsetX;
 @property (nonatomic) CGFloat totalWidth;
 @property (nonatomic) BOOL dragging;
-@property (nonatomic) BOOL initialized;
 @property (nonatomic) ScrollDirection scrollDirection;
 @end
 
 @implementation LTInfiniteScrollView
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
 - (void)setup
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds))];
+    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleHeight;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.delegate = self;
     self.scrollView.clipsToBounds = NO;
@@ -51,11 +69,7 @@
 
 - (void)reloadData
 {
-    if (!self.initialized) {
-        [self setup];
-        self.initialized = YES;
-    }
-    
+
     for (UIView *view in self.views) {
         [view removeFromSuperview];
     }
@@ -75,7 +89,7 @@
     
     int begin = -ceil(self.visibleViewCount / 2.0f);
     int end = ceil(self.visibleViewCount / 2.0f);
-    self.currentIndex = 0;
+    _currentIndex = 0;
     
     self.scrollView.contentOffset = CGPointMake(self.totalWidth / 2-CGRectGetWidth(self.bounds) / 2, 0);
     
@@ -117,7 +131,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat offset = [self currentCenter].x - self.totalWidth / 2;
-    self.currentIndex = ceil((offset- self.viewSize.width / 2) / self.viewSize.width);
+    _currentIndex = ceil((offset- self.viewSize.width / 2) / self.viewSize.width);
     
     //    NSLog(@"--------------------------------");
     for (UIView *view in self.views) {
@@ -130,14 +144,16 @@
                 indexNeeded = indexOfViewToReuse - (self.visibleViewCount + 2);
             }
             
-            //NSLog(@"index:%d indexNeeded:%d",indexOfViewToReuse,indexNeeded);
-            
-            [view removeFromSuperview];
-            
-            UIView *viewNeeded = [self.dataSource viewAtIndex:indexNeeded reusingView:view];
-            viewNeeded.center = [self centerForViewAtIndex:indexNeeded];
-            [self.scrollView addSubview:viewNeeded];
-            viewNeeded.tag = indexNeeded;
+            if (fabs(indexNeeded) <= floorf(self.totalViewCount / 2)) {
+                //NSLog(@"index:%d indexNeeded:%d",indexOfViewToReuse,indexNeeded);
+                
+                [view removeFromSuperview];
+                
+                UIView *viewNeeded = [self.dataSource viewAtIndex:indexNeeded reusingView:view];
+                viewNeeded.center = [self centerForViewAtIndex:indexNeeded];
+                [self.scrollView addSubview:viewNeeded];
+                viewNeeded.tag = indexNeeded;
+            }
         };
         
         CGFloat currentCenter = [self currentCenter].x;

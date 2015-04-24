@@ -29,7 +29,12 @@
     //self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
     self.scrollView.maxScrollDistance = 5;
-    
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     self.viewSize = CGRectGetWidth(self.view.bounds) / NUMBER_OF_VISIBLE_VIEWS;
     [self.scrollView reloadData];
 }
@@ -48,7 +53,7 @@
 # pragma mark - LTInfiniteScrollView dataSource
 - (NSInteger)numberOfViews
 {
-    return 999;
+    return 9;
 }
 
 - (NSInteger)numberOfVisibleViews
