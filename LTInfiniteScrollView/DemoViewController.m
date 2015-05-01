@@ -53,7 +53,7 @@
 # pragma mark - LTInfiniteScrollView dataSource
 - (NSInteger)numberOfViews
 {
-    return 9;
+    return 999;
 }
 
 - (NSInteger)numberOfVisibleViews
