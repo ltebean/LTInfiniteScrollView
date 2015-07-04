@@ -84,7 +84,7 @@
 {
     // you can appy animations duration scrolling here
     
-    CGFloat percent = distance / CGRectGetWidth(self.view.bounds) * NUMBER_OF_VISIBLE_VIEWS;
+    CGFloat percentage = distance / CGRectGetWidth(self.view.bounds) * NUMBER_OF_VISIBLE_VIEWS;
     
     CATransform3D transform = CATransform3DIdentity;
     
@@ -92,31 +92,31 @@
     CGFloat size = self.viewSize;
     CGPoint center = view.center;
     view.center = center;
-    size = size * (1.4 - 0.3 * (fabs(percent)));
+    size = size * (1.4 - 0.3 * (fabs(percentage)));
     view.frame = CGRectMake(0, 0, size, size);
     view.layer.cornerRadius = size / 2;
     view.center = center;
     
     // translate
-    CGFloat translate = self.viewSize / 3 * percent;
-    if (percent > 1) {
+    CGFloat translate = self.viewSize / 3 * percentage;
+    if (percentage > 1) {
         translate = self.viewSize / 3;
-    } else if (percent < -1) {
+    } else if (percentage < -1) {
         translate = -self.viewSize / 3;
     }
     transform = CATransform3DTranslate(transform, translate, 0, 0);
     
     // rotate
-    if (fabs(percent) < 1) {
+    if (fabs(percentage) < 1) {
         CGFloat angle = 0;
-        if( percent > 0) {
-            angle = - M_PI * (1-fabs(percent));
+        if( percentage > 0) {
+            angle = - M_PI * (1-fabs(percentage));
         } else {
-            angle =  M_PI * (1-fabs(percent));
+            angle =  M_PI * (1-fabs(percentage));
         }
         transform.m34 = 1.0/-600;
-        if (fabs(percent) <= 0.5) {
-            angle =  M_PI * percent;
+        if (fabs(percentage) <= 0.5) {
+            angle =  M_PI * percentage;
             UILabel *label = (UILabel *)view;
             label.text = @"back";
             label.backgroundColor = [UIColor darkGrayColor];

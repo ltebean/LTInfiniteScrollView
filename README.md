@@ -29,13 +29,13 @@ Then implement `LTInfiniteScrollViewDataSource` protocol:
 
 Sample code:
 ```objective-c
-- (NSInteger)totalViewCount
+- (NSInteger)numberOfViews
 {
     // you can set it to a very big number to mimic the infinite behavior, no performance issue here
     return 9999; 
 }
 
-- (NSInteger)visibleViewCount
+- (NSInteger)numberOfVisibleViews
 {
     return 5;
 }
