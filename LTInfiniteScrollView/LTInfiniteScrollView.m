@@ -130,9 +130,10 @@
 # pragma mark - UIScrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat offset = [self currentCenter].x - self.totalWidth / 2;
+    CGFloat currentCenter = [self currentCenter].x;
+    CGFloat offset = currentCenter - self.totalWidth / 2;
     _currentIndex = ceil((offset- self.viewSize.width / 2) / self.viewSize.width);
-    
+
     //    NSLog(@"--------------------------------");
     for (UIView *view in self.views) {
         if ([self viewCanBeQueuedForReuse:view]) {
@@ -156,7 +157,6 @@
             }
         };
         
-        CGFloat currentCenter = [self currentCenter].x;
         [self.delegate updateView:view withDistanceToCenter:(view.center.x - currentCenter) scrollDirection:self.scrollDirection];
         
     }

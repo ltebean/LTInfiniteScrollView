@@ -10,13 +10,13 @@
 		FA218F481AC790820010778D /* MenuDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA218F471AC790820010778D /* MenuDemoViewController.m */; };
 		FA7239D21A1ED83200CB0BF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7239D11A1ED83200CB0BF9 /* main.m */; };
 		FA7239D51A1ED83200CB0BF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7239D41A1ED83200CB0BF9 /* AppDelegate.m */; };
-		FA7239D81A1ED83200CB0BF9 /* LTInfiniteScrollView.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA7239D61A1ED83200CB0BF9 /* LTInfiniteScrollView.xcdatamodeld */; };
 		FA7239DB1A1ED83200CB0BF9 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7239DA1A1ED83200CB0BF9 /* DemoViewController.m */; };
 		FA7239DE1A1ED83200CB0BF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA7239DC1A1ED83200CB0BF9 /* Main.storyboard */; };
 		FA7239E01A1ED83200CB0BF9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA7239DF1A1ED83200CB0BF9 /* Images.xcassets */; };
 		FA7239E31A1ED83200CB0BF9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7239E11A1ED83200CB0BF9 /* LaunchScreen.xib */; };
 		FA7239EF1A1ED83200CB0BF9 /* LTInfiniteScrollViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7239EE1A1ED83200CB0BF9 /* LTInfiniteScrollViewTests.m */; };
 		FA7239FB1A1ED86300CB0BF9 /* LTInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7239FA1A1ED86300CB0BF9 /* LTInfiniteScrollView.m */; };
+		FA8D95031B7499E700AF92F3 /* TaskSwitcherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D95021B7499E700AF92F3 /* TaskSwitcherViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +37,6 @@
 		FA7239D11A1ED83200CB0BF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FA7239D31A1ED83200CB0BF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FA7239D41A1ED83200CB0BF9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FA7239D71A1ED83200CB0BF9 /* LTInfiniteScrollView.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LTInfiniteScrollView.xcdatamodel; sourceTree = "<group>"; };
 		FA7239D91A1ED83200CB0BF9 /* DemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		FA7239DA1A1ED83200CB0BF9 /* DemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 		FA7239DD1A1ED83200CB0BF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -48,6 +47,8 @@
 		FA7239EE1A1ED83200CB0BF9 /* LTInfiniteScrollViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LTInfiniteScrollViewTests.m; sourceTree = "<group>"; };
 		FA7239F91A1ED86300CB0BF9 /* LTInfiniteScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTInfiniteScrollView.h; sourceTree = "<group>"; };
 		FA7239FA1A1ED86300CB0BF9 /* LTInfiniteScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTInfiniteScrollView.m; sourceTree = "<group>"; };
+		FA8D95011B7499E700AF92F3 /* TaskSwitcherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskSwitcherViewController.h; sourceTree = "<group>"; };
+		FA8D95021B7499E700AF92F3 /* TaskSwitcherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskSwitcherViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,10 +97,11 @@
 				FA7239DA1A1ED83200CB0BF9 /* DemoViewController.m */,
 				FA218F461AC790820010778D /* MenuDemoViewController.h */,
 				FA218F471AC790820010778D /* MenuDemoViewController.m */,
+				FA8D95011B7499E700AF92F3 /* TaskSwitcherViewController.h */,
+				FA8D95021B7499E700AF92F3 /* TaskSwitcherViewController.m */,
 				FA7239DC1A1ED83200CB0BF9 /* Main.storyboard */,
 				FA7239DF1A1ED83200CB0BF9 /* Images.xcassets */,
 				FA7239E11A1ED83200CB0BF9 /* LaunchScreen.xib */,
-				FA7239D61A1ED83200CB0BF9 /* LTInfiniteScrollView.xcdatamodeld */,
 				FA7239CF1A1ED83200CB0BF9 /* Supporting Files */,
 			);
 			path = LTInfiniteScrollView;
@@ -189,6 +191,7 @@
 				TargetAttributes = {
 					FA7239CB1A1ED83200CB0BF9 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 89YHB42JY7;
 					};
 					FA7239E71A1ED83200CB0BF9 = {
 						CreatedOnToolsVersion = 6.1;
@@ -242,9 +245,9 @@
 			files = (
 				FA7239D51A1ED83200CB0BF9 /* AppDelegate.m in Sources */,
 				FA7239D21A1ED83200CB0BF9 /* main.m in Sources */,
+				FA8D95031B7499E700AF92F3 /* TaskSwitcherViewController.m in Sources */,
 				FA218F481AC790820010778D /* MenuDemoViewController.m in Sources */,
 				FA7239DB1A1ED83200CB0BF9 /* DemoViewController.m in Sources */,
-				FA7239D81A1ED83200CB0BF9 /* LTInfiniteScrollView.xcdatamodeld in Sources */,
 				FA7239FB1A1ED86300CB0BF9 /* LTInfiniteScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,6 +370,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = LTInfiniteScrollView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -378,6 +382,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = LTInfiniteScrollView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -450,19 +455,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		FA7239D61A1ED83200CB0BF9 /* LTInfiniteScrollView.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				FA7239D71A1ED83200CB0BF9 /* LTInfiniteScrollView.xcdatamodel */,
-			);
-			currentVersion = FA7239D71A1ED83200CB0BF9 /* LTInfiniteScrollView.xcdatamodel */;
-			path = LTInfiniteScrollView.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = FA7239C41A1ED83200CB0BF9 /* Project object */;
 }

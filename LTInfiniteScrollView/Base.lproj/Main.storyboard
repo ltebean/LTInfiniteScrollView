@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A388b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4u6-aZ-Kfv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4u6-aZ-Kfv">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--Demo View Controller-->
@@ -36,6 +36,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="KeR-DG-Ga1">
+                        <barButtonItem key="leftBarButtonItem" title="switcher" id="Q6d-7s-E3S">
+                            <connections>
+                                <segue destination="rH6-23-393" kind="push" id="DGJ-wL-A7P"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="menu" id="PeS-6D-Zkv">
                             <connections>
                                 <segue destination="mcz-iM-S7J" kind="push" id="aIa-UA-cjL"/>
@@ -46,6 +51,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1253" y="315"/>
+        </scene>
+        <!--Task Switcher View Controller-->
+        <scene sceneID="hRG-fi-ViT">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="rH6-23-393" customClass="TaskSwitcherViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="92W-OK-r5T">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Pq5-vU-MO6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="naH-MM-XIz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1253" y="1090"/>
         </scene>
         <!--Item-->
         <scene sceneID="GMM-wb-XwD">
