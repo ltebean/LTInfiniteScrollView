@@ -4,7 +4,7 @@
 ##### 1. You can apply animation to each view during the scroll:
 ![LTInfiniteScrollView](https://raw.githubusercontent.com/ltebean/LTInfiniteScrollView/master/demo/demo.gif)
 
-##### 2. The iOS 9 task switcher animation can be inplemented in ten minutes with the support of this lib:
+##### 2. The iOS 9 task switcher animation can be implemented in ten minutes with the support of this lib:
 ![LTInfiniteScrollView](https://raw.githubusercontent.com/ltebean/LTInfiniteScrollView/master/demo/task-switcher-demo.gif)
 
 
