@@ -82,7 +82,14 @@ Sample code:
 If you want to apply any animation during scrolling, implement `LTInfiniteScrollViewDelegate` protocol: 
 ```objective-c
 @protocol LTInfiniteScrollViewDelegate <NSObject>
-- (void)updateView:(UIView *)view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction;
+- (void)updateView:(UIView *)view withProgress:(CGFloat)progress scrollDirection:(ScrollDirection)direction;
 @end
 ```
-See the example for details~ 
+The value of progress dependends on the position of that view, if there are 5 visible views, the value will be ranged from -2 to 2:
+```
+|                  |
+|-2  -1   0   1   2|
+|                  |
+```
+
+You can clone the project and investigate the example for details. 

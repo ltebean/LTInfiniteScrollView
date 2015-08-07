@@ -101,7 +101,8 @@
         view.tag = i;
         [self.views addObject:view];
         [self.scrollView addSubview:view];
-        [self.delegate updateView:view withDistanceToCenter:(view.center.x - currentCenter) scrollDirection:self.scrollDirection];
+        CGFloat progress = (view.center.x - currentCenter) / CGRectGetWidth(self.bounds) * self.visibleViewCount;
+        [self.delegate updateView:view withProgress:progress scrollDirection:self.scrollDirection];
     }
 }
 
@@ -157,7 +158,8 @@
             }
         };
         
-        [self.delegate updateView:view withDistanceToCenter:(view.center.x - currentCenter) scrollDirection:self.scrollDirection];
+        CGFloat progress = (view.center.x - currentCenter) / CGRectGetWidth(self.bounds) * self.visibleViewCount;
+        [self.delegate updateView:view withProgress:progress scrollDirection:self.scrollDirection];
         
     }
     if (self.scrollView.contentOffset.x > self.preContentOffsetX) {

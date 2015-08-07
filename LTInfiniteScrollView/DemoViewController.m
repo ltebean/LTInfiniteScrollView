@@ -80,11 +80,9 @@
     return aView;
 }
 
-- (void)updateView:(UIView *)view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction
+- (void)updateView:(UIView *)view withProgress:(CGFloat)progress scrollDirection:(ScrollDirection)direction
 {
     // you can appy animations duration scrolling here
-    
-    CGFloat percentage = distance / CGRectGetWidth(self.view.bounds) * NUMBER_OF_VISIBLE_VIEWS;
     
     CATransform3D transform = CATransform3DIdentity;
     
@@ -92,31 +90,31 @@
     CGFloat size = self.viewSize;
     CGPoint center = view.center;
     view.center = center;
-    size = size * (1.4 - 0.3 * (fabs(percentage)));
+    size = size * (1.4 - 0.3 * (fabs(progress)));
     view.frame = CGRectMake(0, 0, size, size);
     view.layer.cornerRadius = size / 2;
     view.center = center;
     
     // translate
-    CGFloat translate = self.viewSize / 3 * percentage;
-    if (percentage > 1) {
+    CGFloat translate = self.viewSize / 3 * progress;
+    if (progress > 1) {
         translate = self.viewSize / 3;
-    } else if (percentage < -1) {
+    } else if (progress < -1) {
         translate = -self.viewSize / 3;
     }
     transform = CATransform3DTranslate(transform, translate, 0, 0);
     
     // rotate
-    if (fabs(percentage) < 1) {
+    if (fabs(progress) < 1) {
         CGFloat angle = 0;
-        if( percentage > 0) {
-            angle = - M_PI * (1-fabs(percentage));
+        if(progress > 0) {
+            angle = - M_PI * (1 - fabs(progress));
         } else {
-            angle =  M_PI * (1-fabs(percentage));
+            angle =  M_PI * (1 - fabs(progress));
         }
-        transform.m34 = 1.0/-600;
-        if (fabs(percentage) <= 0.5) {
-            angle =  M_PI * percentage;
+        transform.m34 = 1.0 / -600;
+        if (fabs(progress) <= 0.5) {
+            angle =  M_PI * progress;
             UILabel *label = (UILabel *)view;
             label.text = @"back";
             label.backgroundColor = [UIColor darkGrayColor];

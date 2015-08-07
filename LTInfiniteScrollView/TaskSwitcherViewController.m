@@ -85,11 +85,9 @@
     return view;
 }
 
-- (void)updateView:(UIView *)view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction
+- (void)updateView:(UIView *)view withProgress:(CGFloat)progress scrollDirection:(ScrollDirection)direction
 {
     
-    CGFloat progress = distance / CGRectGetWidth(self.view.bounds) * NUMBER_OF_VISIBLE_VIEWS;
-
     // adjust z-index of each views
     NSMutableArray *views = [[self.scrollView allViews] mutableCopy];
     [views sortUsingComparator:^NSComparisonResult(UIView *view1, UIView *view2) {

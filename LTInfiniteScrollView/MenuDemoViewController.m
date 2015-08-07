@@ -80,13 +80,12 @@
     return view;
 }
 
-- (void)updateView:(UIView *)view withDistanceToCenter:(CGFloat)distance scrollDirection:(ScrollDirection)direction
+- (void)updateView:(UIView *)view withProgress:(CGFloat)progress scrollDirection:(ScrollDirection)direction
 {
     // you can appy animations duration scrolling here
-     CGFloat percentage = distance / CGRectGetWidth(self.view.bounds) * NUMBER_OF_VISIBLE_VIEWS;
-    if (percentage == 0) {
+    if (progress == 0) {
         [self animateMenuOut:view];
-    } else if(fabs(percentage) == 1) {
+    } else if(fabs(progress) == 1) {
         [self animateMenuBack:view];
     }
     
