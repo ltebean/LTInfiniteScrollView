@@ -18,7 +18,6 @@
 @property (nonatomic) NSInteger totalViewCount;
 @property (nonatomic) CGFloat preContentOffsetX;
 @property (nonatomic) CGFloat totalWidth;
-@property (nonatomic) BOOL dragging;
 @property (nonatomic) ScrollDirection scrollDirection;
 @end
 
@@ -77,7 +76,7 @@
     self.visibleViewCount = [self.dataSource numberOfVisibleViews];
     self.totalViewCount = [self.dataSource numberOfViews];
     
-    CGFloat viewWidth = CGRectGetWidth(self.bounds)/self.visibleViewCount;
+    CGFloat viewWidth = CGRectGetWidth(self.bounds) / self.visibleViewCount;
     CGFloat viewHeight = CGRectGetHeight(self.bounds);
     self.viewSize = CGSizeMake(viewWidth, viewHeight);
     
@@ -87,15 +86,15 @@
     
     self.views = [NSMutableArray array];
     
-    int begin = -ceil(self.visibleViewCount / 2.0f);
-    int end = ceil(self.visibleViewCount / 2.0f);
+    NSInteger begin = -ceil(self.visibleViewCount / 2.0f);
+    NSInteger end = ceil(self.visibleViewCount / 2.0f);
     _currentIndex = 0;
     
-    self.scrollView.contentOffset = CGPointMake(self.totalWidth / 2-CGRectGetWidth(self.bounds) / 2, 0);
+    self.scrollView.contentOffset = CGPointMake(self.totalWidth / 2 - CGRectGetWidth(self.bounds) / 2, 0);
     
     CGFloat currentCenter = [self currentCenter].x;
     
-    for (int i = begin; i<= end;i++) {
+    for (NSInteger i = begin; i <= end; i++) {
         UIView *view = [self.dataSource viewAtIndex:i reusingView:nil];
         view.center = [self centerForViewAtIndex:i];
         view.tag = i;
@@ -108,7 +107,6 @@
 
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated
 {
-    self.dragging = YES;
     [self.scrollView setContentOffset:[self contentOffsetForIndex:index] animated:animated];
 }
 
@@ -135,7 +133,6 @@
     CGFloat offset = currentCenter - self.totalWidth / 2;
     _currentIndex = ceil((offset- self.viewSize.width / 2) / self.viewSize.width);
 
-    //    NSLog(@"--------------------------------");
     for (UIView *view in self.views) {
         if ([self viewCanBeQueuedForReuse:view]) {
             NSInteger indexNeeded;
@@ -148,9 +145,7 @@
             
             if (labs(indexNeeded) <= floorf(self.totalViewCount / 2)) {
                 //NSLog(@"index:%d indexNeeded:%d",indexOfViewToReuse,indexNeeded);
-                
                 [view removeFromSuperview];
-                
                 UIView *viewNeeded = [self.dataSource viewAtIndex:indexNeeded reusingView:view];
                 viewNeeded.center = [self centerForViewAtIndex:indexNeeded];
                 [self.scrollView addSubview:viewNeeded];
@@ -170,14 +165,8 @@
     self.preContentOffsetX = self.scrollView.contentOffset.x;
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    self.dragging = YES;
-}
-
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    self.dragging = NO;
     if (!self.pagingEnabled && !decelerate) {
         [self.scrollView setContentOffset:[self contentOffsetForIndex:self.currentIndex] animated:YES];
     }
@@ -218,21 +207,21 @@
 
 - (CGPoint)contentOffsetForIndex:(NSInteger)index
 {
-    CGFloat x = self.totalWidth / 2 + index*self.viewSize.width - CGRectGetWidth(self.bounds) / 2;
+    CGFloat x = self.totalWidth / 2 + index * self.viewSize.width - CGRectGetWidth(self.bounds) / 2;
     return CGPointMake(x, 0);
 }
 
 - (CGPoint)centerForViewAtIndex:(NSInteger)index
 {
     CGFloat y = CGRectGetMidY(self.bounds);
-    CGFloat x = self.totalWidth/2 + index * self.viewSize.width;
+    CGFloat x = self.totalWidth / 2 + index * self.viewSize.width;
     return CGPointMake(x, y);
 }
 
 - (BOOL)viewCanBeQueuedForReuse:(UIView *)view
 {
     CGFloat distanceToCenter = [self currentCenter].x - view.center.x;
-    CGFloat threshold = (ceil(self.visibleViewCount/2.0f)) * self.viewSize.width + self.viewSize.width / 2.0f;
+    CGFloat threshold = (ceil(self.visibleViewCount / 2.0f)) * self.viewSize.width + self.viewSize.width / 2.0f;
     if (self.scrollDirection == ScrollDirectionLeft) {
         if (distanceToCenter < 0){
             return NO;
