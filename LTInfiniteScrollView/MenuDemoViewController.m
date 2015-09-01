@@ -53,7 +53,7 @@
 }
 
 # pragma mark - LTInfiniteScrollView delegate
-- (UIView *)viewAtIndex:(NSInteger)index reusingView:(UIView *)view;
+- (UIView *)viewAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
     if (!view) {
         view = [self newIconView];
