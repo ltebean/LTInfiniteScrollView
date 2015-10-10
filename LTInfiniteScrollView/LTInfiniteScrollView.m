@@ -187,14 +187,18 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (!self.pagingEnabled && !decelerate) {
+    if (!self.pagingEnabled && !decelerate && self.needsCenterPage) {
+        CGFloat offsetX = scrollView.contentOffset.x;
+        if (offsetX < 0 || offsetX > scrollView.contentSize.width) {
+            return;
+        }
         [self.scrollView setContentOffset:[self contentOffsetForIndex:self.currentIndex] animated:YES];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (!self.pagingEnabled) {
+    if (!self.pagingEnabled && self.needsCenterPage) {
         [self.scrollView setContentOffset:[self contentOffsetForIndex:self.currentIndex] animated:YES];
     }
 }
@@ -202,6 +206,9 @@
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
     if (self.maxScrollDistance <= 0) {
+        return;
+    }
+    if (![self needsCenterPage]) {
         return;
     }
     CGFloat targetX = targetContentOffset -> x;
@@ -217,6 +224,16 @@
 }
 
 #pragma mark - helper methods
+
+- (BOOL)needsCenterPage
+{
+    CGFloat offsetX = self.scrollView.contentOffset.x;
+    if (offsetX < 0 || offsetX > self.scrollView.contentSize.width - self.viewSize.width) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
 
 - (CGPoint)currentCenter
 {
