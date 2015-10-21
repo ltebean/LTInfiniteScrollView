@@ -66,6 +66,12 @@
     self.scrollView.scrollEnabled = scrollEnabled;
 }
 
+- (void)setBounces:(BOOL)bounces
+{
+    _bounces = bounces;
+    self.scrollView.bounces = bounces;
+}
+
 - (void)reloadData
 {
     

@@ -28,6 +28,7 @@ typedef enum ScrollDirection {
 @property (nonatomic, weak) id<LTInfiniteScrollViewDelegate> delegate;
 @property (nonatomic) BOOL scrollEnabled;
 @property (nonatomic) BOOL pagingEnabled;
+@property (nonatomic) BOOL bounces;
 @property (nonatomic) NSInteger maxScrollDistance;
 
 - (void)reloadData;
