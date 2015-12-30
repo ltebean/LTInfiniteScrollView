@@ -132,6 +132,9 @@
         self.scrollDirection = ScrollDirectionLeft;
     }
     [self.scrollView setContentOffset:[self contentOffsetForIndex:index] animated:animated];
+    if (!animated) {
+        [self scrollViewDidScroll:self.scrollView];
+    }
 }
 
 - (UIView *)viewAtIndex:(NSInteger)index
