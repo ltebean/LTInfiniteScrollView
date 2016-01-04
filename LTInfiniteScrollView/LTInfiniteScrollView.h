@@ -31,7 +31,7 @@ typedef enum ScrollDirection {
 @property (nonatomic) BOOL bounces;
 @property (nonatomic) NSInteger maxScrollDistance;
 
-- (void)reloadData;
+- (void)reloadDataWithInitialIndex:(NSInteger)initialIndex;
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated;
 - (UIView *)viewAtIndex:(NSInteger)index;
 - (NSArray *)allViews;

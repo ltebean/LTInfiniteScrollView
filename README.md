@@ -18,7 +18,7 @@ Create the scroll view by:
 self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 200)];
 [self.view addSubview:self.scrollView];
 self.scrollView.dataSource = self;
-[self.scrollView reloadData];
+[self.scrollView reloadDataWithInitialIndex: 0];
 ```
 
 Then implement `LTInfiniteScrollViewDataSource` protocol:
@@ -72,7 +72,7 @@ Sample code:
 @property (nonatomic) BOOL pagingEnabled;
 @property (nonatomic) NSInteger maxScrollDistance; 
 
-- (void)reloadData;
+- (void)reloadDataWithInitialIndex:(NSInteger)initialIndex;
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated;
 - (UIView *)viewAtIndex:(NSInteger)index;
 - (NSArray *)allViews;

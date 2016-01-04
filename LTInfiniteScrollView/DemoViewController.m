@@ -11,7 +11,7 @@
 
 #define COLOR [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 
-#define NUMBER_OF_VISIBLE_VIEWS 5
+#define NUMBER_OF_VISIBLE_VIEWS 3
 
 @interface DemoViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
 @property (nonatomic,strong) LTInfiniteScrollView *scrollView;
@@ -36,24 +36,25 @@
 {
     [super viewWillAppear:animated];
     self.viewSize = CGRectGetWidth(self.view.bounds) / NUMBER_OF_VISIBLE_VIEWS;
-    [self.scrollView reloadData];
+    [self.scrollView reloadDataWithInitialIndex:5];
+//    [self.scrollView scrollToIndex:10 animated:YES];
 }
 
 # pragma mark - IBAction
 - (IBAction)reload:(id)sender {
     self.scrollView.delegate = nil;
-    [self.scrollView reloadData];
+    [self.scrollView reloadDataWithInitialIndex:0];
 }
 
 - (IBAction)reloadWithFancyEffect:(id)sender {
     self.scrollView.delegate = self;
-    [self.scrollView reloadData];
+    [self.scrollView reloadDataWithInitialIndex:0];
 }
 
 # pragma mark - LTInfiniteScrollView dataSource
 - (NSInteger)numberOfViews
 {
-    return 999;
+    return 21;
 }
 
 - (NSInteger)numberOfVisibleViews

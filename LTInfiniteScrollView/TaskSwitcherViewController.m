@@ -36,7 +36,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self.scrollView reloadData];
+    [self.scrollView reloadDataWithInitialIndex:0];
 }
 
 # pragma mark - LTInfiniteScrollView dataSource
