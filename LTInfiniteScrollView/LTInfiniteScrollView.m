@@ -131,7 +131,7 @@
     NSInteger end = _currentIndex + ceil(self.visibleViewCount / 2.0f);
     
     for (NSInteger i = begin; i <= end; i++) {
-        if (i * 2 >= self.totalViewCount || i * 2 <= -self.totalViewCount) {
+        if (i * 2 >= self.totalViewCount || i * 2 < -self.totalViewCount) {
             continue;
         }
         [indexesNeeded addObject: @(i)];
