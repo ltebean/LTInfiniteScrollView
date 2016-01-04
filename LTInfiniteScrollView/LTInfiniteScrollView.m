@@ -99,6 +99,7 @@
     _currentIndex = initialIndex;
     self.scrollView.contentOffset = [self contentOffsetForIndex:_currentIndex];
     [self reArrangeViews];
+    [self updateProgress];
 }
 
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated
@@ -121,6 +122,8 @@
     return [self.views allValues];
 }
 
+#pragma mark - private methods
+
 - (void)reArrangeViews
 {
     NSMutableSet *indexesNeeded = [NSMutableSet set];
@@ -133,7 +136,6 @@
         }
         [indexesNeeded addObject: @(i)];
     }
-    
     for (NSNumber *indexNeeded in indexesNeeded) {
         UIView *view = self.views[indexNeeded];
         if (view) {
@@ -154,7 +156,15 @@
         self.views[indexNeeded] = view;
         [self.scrollView addSubview:view];
     }
-    
+}
+
+- (void)updateProgress
+{
+    CGFloat currentCenter = [self currentCenter].x;
+    for (UIView *view in [self allViews]) {
+        CGFloat progress = (view.center.x - currentCenter) / CGRectGetWidth(self.bounds) * self.visibleViewCount;
+        [self.delegate updateView:view withProgress:progress scrollDirection:self.scrollDirection];
+    }
 }
 
 # pragma mark - UIScrollView delegate
@@ -172,10 +182,7 @@
     self.preContentOffsetX = self.scrollView.contentOffset.x;
     
     [self reArrangeViews];
-    for (UIView *view in [self allViews]) {
-        CGFloat progress = (view.center.x - currentCenter) / CGRectGetWidth(self.bounds) * self.visibleViewCount;
-        [self.delegate updateView:view withProgress:progress scrollDirection:self.scrollDirection];
-    }
+    [self updateProgress];
 }
 
 

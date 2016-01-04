@@ -82,6 +82,9 @@
 
 - (void)updateView:(UIView *)view withProgress:(CGFloat)progress scrollDirection:(ScrollDirection)direction
 {
+    if (view.tag == 0) {
+        NSLog(@"%f", progress);
+    }
     // you can appy animations duration scrolling here
     if (progress == 0) {
         [self animateMenuOut:view];

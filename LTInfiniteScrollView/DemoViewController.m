@@ -11,7 +11,7 @@
 
 #define COLOR [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 
-#define NUMBER_OF_VISIBLE_VIEWS 3
+#define NUMBER_OF_VISIBLE_VIEWS 5
 
 @interface DemoViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
 @property (nonatomic,strong) LTInfiniteScrollView *scrollView;

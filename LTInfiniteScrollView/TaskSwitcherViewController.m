@@ -37,6 +37,18 @@
 {
     [super viewDidLayoutSubviews];
     [self.scrollView reloadDataWithInitialIndex:0];
+    [self sortViews];
+}
+
+- (void)sortViews
+{
+    NSMutableArray *views = [[self.scrollView allViews] mutableCopy];
+    [views sortUsingComparator:^NSComparisonResult(UIView *view1, UIView *view2) {
+        return view1.tag > view2.tag;
+    }];
+    for (UIView *view in views) {
+        [view.superview bringSubviewToFront:view];
+    }
 }
 
 # pragma mark - LTInfiniteScrollView dataSource
@@ -87,15 +99,8 @@
 
 - (void)updateView:(UIView *)view withProgress:(CGFloat)progress scrollDirection:(ScrollDirection)direction
 {
-    
     // adjust z-index of each views
-    NSMutableArray *views = [[self.scrollView allViews] mutableCopy];
-    [views sortUsingComparator:^NSComparisonResult(UIView *view1, UIView *view2) {
-        return view1.tag > view2.tag;
-    }];
-    for (UIView *view in views) {
-        [view.superview bringSubviewToFront:view];
-    }
+    [self sortViews];
     
     // alpha
     CGFloat alpha = 1;
