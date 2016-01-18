@@ -74,7 +74,7 @@
 
 - (void)reloadDataWithInitialIndex:(NSInteger)initialIndex
 {
-    for (UIView *view in [self allViews]) {
+    for (UIView *view in self.scrollView.subviews) {
         [view removeFromSuperview];
     }
     
@@ -95,7 +95,7 @@
     }
     
     self.views = [NSMutableDictionary dictionary];
-
+    
     _currentIndex = initialIndex;
     self.scrollView.contentOffset = [self contentOffsetForIndex:_currentIndex];
     [self reArrangeViews];
@@ -134,7 +134,7 @@
         if (i * 2 >= self.totalViewCount || i * 2 < -self.totalViewCount) {
             continue;
         }
-        [indexesNeeded addObject: @(i)];
+        [indexesNeeded addObject:@(i)];
     }
     for (NSNumber *indexNeeded in indexesNeeded) {
         UIView *view = self.views[indexNeeded];
@@ -142,7 +142,7 @@
             continue;
         }
         // find view to reuse
-        for (NSNumber *index in [self allViews]) {
+        for (NSNumber *index in [self.views allKeys]) {
             if (![indexesNeeded containsObject:index]) {
                 view = self.views[index];
                 [self.views removeObjectForKey:index];
@@ -173,7 +173,7 @@
     CGFloat currentCenter = [self currentCenter].x;
     CGFloat offset = currentCenter - self.totalWidth / 2;
     _currentIndex = ceil((offset- self.viewSize.width / 2) / self.viewSize.width);
-
+    
     if (self.scrollView.contentOffset.x > self.preContentOffsetX) {
         self.scrollDirection = ScrollDirectionLeft;
     } else {
