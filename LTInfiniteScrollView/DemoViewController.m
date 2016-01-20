@@ -28,7 +28,7 @@
     [self.view addSubview:self.scrollView];
     //self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
-    self.scrollView.maxScrollDistance = 2;
+    self.scrollView.maxScrollDistance = 5;
 
 }
 
@@ -66,6 +66,7 @@
 - (UIView *)viewAtIndex:(NSInteger)index reusingView:(UIView *)view;
 {
     if (view) {
+        NSLog(@"%ld", (long)index);
         ((UILabel*)view).text = [NSString stringWithFormat:@"%ld", index];
         return view;
     }
