@@ -30,7 +30,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self.scrollView reloadDataWithInitialIndex:0];
+    [self.scrollView reloadDataWithInitialIndex:200];
 }
 
 - (IBAction)next:(id)sender {
