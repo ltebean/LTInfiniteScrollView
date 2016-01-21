@@ -93,3 +93,6 @@ The value of progress dependends on the position of that view, if there are 5 vi
 ```
 
 You can clone the project and investigate the example for details. 
+
+## the Swift version
+Here's the Swift version: https://github.com/ltebean/LTInfiniteScrollView-Swift
