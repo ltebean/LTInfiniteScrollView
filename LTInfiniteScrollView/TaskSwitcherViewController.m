@@ -11,7 +11,6 @@
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
-#define NUMBER_OF_VISIBLE_VIEWS 5
 #define COLOR [UIColor colorWithRed:0/255.0 green:175/255.0 blue:240/255.0 alpha:1]
 
 @interface TaskSwitcherViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
@@ -31,6 +30,9 @@
     self.scrollView.dataSource = self;
     self.scrollView.delegate = self;
     self.scrollView.maxScrollDistance = 3;
+    
+    CGFloat inset = [UIScreen mainScreen].bounds.size.width / 5 * 2;
+    self.scrollView.contentInset = UIEdgeInsetsMake(0, inset, 0, inset);
 }
 
 - (void)viewDidLayoutSubviews
@@ -54,12 +56,12 @@
 # pragma mark - LTInfiniteScrollView dataSource
 - (NSInteger)numberOfViews
 {
-    return 999;
+    return 20;
 }
 
 - (NSInteger)numberOfVisibleViews
 {
-    return NUMBER_OF_VISIBLE_VIEWS;
+    return 5;
 }
 
 # pragma mark - LTInfiniteScrollView delegate
