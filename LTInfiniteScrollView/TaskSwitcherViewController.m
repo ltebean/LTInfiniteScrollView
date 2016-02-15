@@ -24,21 +24,20 @@
     [super viewDidLoad];
     self.view.backgroundColor = COLOR;
     // Do any additional setup after loading the view.
-    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    self.scrollView = [[LTInfiniteScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [self.view addSubview:self.scrollView];
     
     self.scrollView.dataSource = self;
     self.scrollView.delegate = self;
     self.scrollView.maxScrollDistance = 3;
-    
-    CGFloat inset = [UIScreen mainScreen].bounds.size.width / 5 * 2;
-    self.scrollView.contentInset = UIEdgeInsetsMake(0, inset, 0, inset);
 }
 
-- (void)viewDidLayoutSubviews
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLayoutSubviews];
+    [super viewWillAppear:animated];
     [self.scrollView reloadDataWithInitialIndex:0];
+    CGFloat inset = [UIScreen mainScreen].bounds.size.width / 5 * 2;
+    self.scrollView.contentInset = UIEdgeInsetsMake(0, inset, 0, inset);
     [self sortViews];
 }
 

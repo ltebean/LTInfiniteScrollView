@@ -27,9 +27,9 @@
     self.scrollView.userInteractionEnabled = NO;
 }
 
-- (void)viewDidLayoutSubviews
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLayoutSubviews];
+    [super viewDidAppear:animated];
     [self.scrollView reloadDataWithInitialIndex:200];
 }
 

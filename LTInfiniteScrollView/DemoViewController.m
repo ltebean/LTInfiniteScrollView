@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
         
-    self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 200, [UIScreen mainScreen].bounds.size.width, 200)];
+    self.scrollView = [[LTInfiniteScrollView alloc] initWithFrame:CGRectMake(0, 200, [UIScreen mainScreen].bounds.size.width, 200)];
     [self.view addSubview:self.scrollView];
     //self.scrollView.delegate = self;
     self.scrollView.dataSource = self;

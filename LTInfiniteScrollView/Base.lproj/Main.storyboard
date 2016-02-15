@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4u6-aZ-Kfv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="MJp-XS-9sp">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <scenes>
-        <!--Demo View Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="Rrb-fT-0k2">
+            <objects>
+                <tabBarController id="MJp-XS-9sp" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="LWn-nG-uSC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="2jz-2h-f4P"/>
+                        <segue destination="rH6-23-393" kind="relationship" relationship="viewControllers" id="wzU-hQ-fwU"/>
+                        <segue destination="mcz-iM-S7J" kind="relationship" relationship="viewControllers" id="WJt-qC-WIn"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zUl-zJ-x47" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="751" y="320"/>
+        </scene>
+        <!--Demo-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="DemoViewController" sceneMemberID="viewController">
@@ -36,24 +55,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Demo" id="FNR-gu-7xz"/>
                     <navigationItem key="navigationItem" id="KeR-DG-Ga1">
-                        <barButtonItem key="leftBarButtonItem" title="switcher" id="Q6d-7s-E3S">
-                            <connections>
-                                <segue destination="rH6-23-393" kind="push" id="DGJ-wL-A7P"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="menu" id="PeS-6D-Zkv">
-                            <connections>
-                                <segue destination="mcz-iM-S7J" kind="push" id="aIa-UA-cjL"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="switcher" id="Q6d-7s-E3S"/>
+                        <barButtonItem key="rightBarButtonItem" title="menu" id="PeS-6D-Zkv"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1253" y="315"/>
+            <point key="canvasLocation" x="1232" y="-21"/>
         </scene>
-        <!--Task Switcher View Controller-->
+        <!--Task switcher-->
         <scene sceneID="hRG-fi-ViT">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="rH6-23-393" customClass="TaskSwitcherViewController" sceneMemberID="viewController">
@@ -62,22 +74,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Task switcher" id="3y4-pi-1hM"/>
                     <navigationItem key="navigationItem" id="Pq5-vU-MO6"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="naH-MM-XIz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1253" y="1090"/>
+            <point key="canvasLocation" x="1239" y="734"/>
         </scene>
-        <!--Item-->
+        <!--Menu-->
         <scene sceneID="GMM-wb-XwD">
             <objects>
                 <viewController id="mcz-iM-S7J" customClass="MenuDemoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Ka-Te-H3P">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="0bO-mH-fJ0" customClass="LTInfiniteScrollView">
-                                <rect key="frame" x="0.0" y="555" width="320" height="100"/>
+                                <rect key="frame" x="0.0" y="506" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -107,7 +120,7 @@
                         <color key="backgroundColor" red="0.0" green="0.68627450980000004" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="fBn-MU-0sT"/>
+                    <tabBarItem key="tabBarItem" title="Menu" id="fBn-MU-0sT"/>
                     <navigationItem key="navigationItem" id="I2S-ZQ-owg"/>
                     <connections>
                         <outlet property="scrollView" destination="0bO-mH-fJ0" id="51n-iH-xtZ"/>
@@ -115,26 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csc-7U-CQd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1694" y="315"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="7og-md-gNR">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4u6-aZ-Kfv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Klq-A5-nGQ"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XYv-UW-sAx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="ak7-gg-ox9"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sjs-UK-YSw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="721" y="315"/>
+            <point key="canvasLocation" x="1670" y="320"/>
         </scene>
     </scenes>
 </document>
