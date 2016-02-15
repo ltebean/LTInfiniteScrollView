@@ -29,6 +29,7 @@ typedef enum ScrollDirection {
 @property (nonatomic) BOOL scrollEnabled;
 @property (nonatomic) BOOL pagingEnabled;
 @property (nonatomic) BOOL bounces;
+@property (nonatomic) UIEdgeInsets contentInset;
 @property (nonatomic) NSInteger maxScrollDistance;
 
 - (void)reloadDataWithInitialIndex:(NSInteger)initialIndex;

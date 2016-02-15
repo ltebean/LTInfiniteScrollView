@@ -72,12 +72,18 @@
     self.scrollView.bounces = bounces;
 }
 
+- (void)setContentInset:(UIEdgeInsets)contentInset
+{
+    _contentInset = contentInset;
+    self.scrollView.contentInset = contentInset;
+}
+
 - (void)reloadDataWithInitialIndex:(NSInteger)initialIndex
 {
     for (UIView *view in self.scrollView.subviews) {
         [view removeFromSuperview];
     }
-    
+
     self.visibleViewCount = [self.dataSource numberOfVisibleViews];
     self.totalViewCount = [self.dataSource numberOfViews];
     
