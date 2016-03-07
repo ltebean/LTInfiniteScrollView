@@ -83,6 +83,7 @@
     for (UIView *view in self.scrollView.subviews) {
         [view removeFromSuperview];
     }
+    self.views = [NSMutableDictionary dictionary];
 
     self.visibleViewCount = [self.dataSource numberOfVisibleViews];
     self.totalViewCount = [self.dataSource numberOfViews];
@@ -94,7 +95,6 @@
     self.totalWidth = viewWidth * self.totalViewCount;
     self.scrollView.contentSize = CGSizeMake(self.totalWidth, CGRectGetHeight(self.bounds));
     
-    self.views = [NSMutableDictionary dictionary];
     
     _currentIndex = initialIndex;
     self.scrollView.contentOffset = [self contentOffsetForIndex:_currentIndex];
