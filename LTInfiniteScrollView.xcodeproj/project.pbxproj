@@ -17,6 +17,7 @@
 		FA7239EF1A1ED83200CB0BF9 /* LTInfiniteScrollViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7239EE1A1ED83200CB0BF9 /* LTInfiniteScrollViewTests.m */; };
 		FA7239FB1A1ED86300CB0BF9 /* LTInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7239FA1A1ED86300CB0BF9 /* LTInfiniteScrollView.m */; };
 		FA8D95031B7499E700AF92F3 /* TaskSwitcherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8D95021B7499E700AF92F3 /* TaskSwitcherViewController.m */; };
+		FAFD5DDE1C9517C4008BAF5E /* VerticalScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFD5DDD1C9517C4008BAF5E /* VerticalScrollViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		FA7239FA1A1ED86300CB0BF9 /* LTInfiniteScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTInfiniteScrollView.m; sourceTree = "<group>"; };
 		FA8D95011B7499E700AF92F3 /* TaskSwitcherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskSwitcherViewController.h; sourceTree = "<group>"; };
 		FA8D95021B7499E700AF92F3 /* TaskSwitcherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskSwitcherViewController.m; sourceTree = "<group>"; };
+		FAFD5DDC1C9517C4008BAF5E /* VerticalScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticalScrollViewController.h; sourceTree = "<group>"; };
+		FAFD5DDD1C9517C4008BAF5E /* VerticalScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalScrollViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,8 @@
 				FA218F471AC790820010778D /* MenuDemoViewController.m */,
 				FA8D95011B7499E700AF92F3 /* TaskSwitcherViewController.h */,
 				FA8D95021B7499E700AF92F3 /* TaskSwitcherViewController.m */,
+				FAFD5DDC1C9517C4008BAF5E /* VerticalScrollViewController.h */,
+				FAFD5DDD1C9517C4008BAF5E /* VerticalScrollViewController.m */,
 				FA7239DC1A1ED83200CB0BF9 /* Main.storyboard */,
 				FA7239DF1A1ED83200CB0BF9 /* Images.xcassets */,
 				FA7239E11A1ED83200CB0BF9 /* LaunchScreen.xib */,
@@ -247,6 +252,7 @@
 				FA8D95031B7499E700AF92F3 /* TaskSwitcherViewController.m in Sources */,
 				FA218F481AC790820010778D /* MenuDemoViewController.m in Sources */,
 				FA7239DB1A1ED83200CB0BF9 /* DemoViewController.m in Sources */,
+				FAFD5DDE1C9517C4008BAF5E /* VerticalScrollViewController.m in Sources */,
 				FA7239FB1A1ED86300CB0BF9 /* LTInfiniteScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

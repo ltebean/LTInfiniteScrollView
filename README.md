@@ -11,6 +11,9 @@
 ##### 3. The fancy menu can also be implemented easily:
 ![LTInfiniteScrollView](https://raw.githubusercontent.com/ltebean/LTInfiniteScrollView/master/demo/menu-demo.gif)
 
+##### 4. Vertical scroll is also supported:
+![LTInfiniteScrollView](https://raw.githubusercontent.com/ltebean/LTInfiniteScrollView/master/demo/vertical-scroll.gif)
+
 ## Usage
 
 Create the scroll view by:
@@ -68,6 +71,7 @@ Sample code:
 @property (nonatomic) NSInteger currentIndex;
 @property (nonatomic,weak) id<LTInfiniteScrollViewDataSource> dataSource;
 @property (nonatomic,weak) id<LTInfiniteScrollViewDelegate> delegate;
+@property (nonatomic) BOOL verticalScroll;
 @property (nonatomic) BOOL scrollEnabled;
 @property (nonatomic) BOOL pagingEnabled;
 @property (nonatomic) NSInteger maxScrollDistance; 

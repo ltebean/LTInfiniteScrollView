@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 typedef enum ScrollDirection {
-    ScrollDirectionRight,
-    ScrollDirectionLeft,
+    ScrollDirectionNext,
+    ScrollDirectionPrev,
 } ScrollDirection;
 
 @protocol LTInfiniteScrollViewDelegate <NSObject>
@@ -26,6 +26,7 @@ typedef enum ScrollDirection {
 @property (nonatomic, readonly) NSInteger currentIndex;
 @property (nonatomic, weak) id<LTInfiniteScrollViewDataSource> dataSource;
 @property (nonatomic, weak) id<LTInfiniteScrollViewDelegate> delegate;
+@property (nonatomic) BOOL verticalScroll;
 @property (nonatomic) BOOL scrollEnabled;
 @property (nonatomic) BOOL pagingEnabled;
 @property (nonatomic) BOOL bounces;
