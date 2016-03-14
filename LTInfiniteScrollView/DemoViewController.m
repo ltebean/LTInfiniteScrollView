@@ -68,18 +68,18 @@
 {
     if (view) {
         NSLog(@"%ld", (long)index);
-        ((UILabel*)view).text = [NSString stringWithFormat:@"%ld", index];
+        ((UILabel *)view).text = [NSString stringWithFormat:@"%ld", index];
         return view;
     }
     
-    UILabel *aView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.viewSize, self.viewSize)];
+    UILabel *aView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.viewSize, self.viewSize)];
     aView.backgroundColor = [UIColor blackColor];
     aView.layer.cornerRadius = self.viewSize/2.0f;
     aView.layer.masksToBounds = YES;
     aView.backgroundColor = COLOR;
     aView.textColor = [UIColor whiteColor];
     aView.textAlignment = NSTextAlignmentCenter;
-    aView.text = [NSString stringWithFormat:@"%ld", (long)index];
+    aView.text = [NSString stringWithFormat:@"%ld", index];
     return aView;
 }
 

@@ -46,17 +46,16 @@
 - (UIView *)viewAtIndex:(NSInteger)index reusingView:(UIView *)view;
 {
     if (view) {
-        NSLog(@"%ld", (long)index);
         ((UILabel *)view).text = [NSString stringWithFormat:@"%ld", index];
         return view;
     }
     
-    UILabel *aView = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 20, CGRectGetHeight(self.view.bounds) / 3)];
+    UILabel *aView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 20, CGRectGetHeight(self.view.bounds) / 3)];
     aView.backgroundColor = [UIColor blackColor];
     aView.backgroundColor = [UIColor darkGrayColor];
     aView.textColor = [UIColor whiteColor];
     aView.textAlignment = NSTextAlignmentCenter;
-    aView.text = [NSString stringWithFormat:@"%ld", (long)index];
+    aView.text = [NSString stringWithFormat:@"%ld", index];
     return aView;
 }
 
