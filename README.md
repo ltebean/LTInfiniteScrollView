@@ -18,7 +18,7 @@
 
 Create the scroll view by:
 ```objective-c
-self.scrollView = [[LTInfiniteScrollView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 200)];
+self.scrollView = [[LTInfiniteScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 200)];
 [self.view addSubview:self.scrollView];
 self.scrollView.dataSource = self;
 [self.scrollView reloadDataWithInitialIndex: 0];
@@ -26,7 +26,7 @@ self.scrollView.dataSource = self;
 
 Then implement `LTInfiniteScrollViewDataSource` protocol:
 ```objective-c
-@protocol LTInfiniteScrollViewDataSource <NSObject>
+@protocol LTInfiniteScrollViewDataSource<NSObject>
 - (UIView *)viewAtIndex:(NSInteger)index reusingView:(UIView *)view;
 - (NSInteger)numberOfViews;
 - (NSInteger)numberOfVisibleViews;
@@ -67,14 +67,16 @@ Sample code:
 
 `LTInfinitedScrollView` interface:
 ```objective-c
-@interface LTInfiniteScrollView : UIView
-@property (nonatomic) NSInteger currentIndex;
-@property (nonatomic,weak) id<LTInfiniteScrollViewDataSource> dataSource;
-@property (nonatomic,weak) id<LTInfiniteScrollViewDelegate> delegate;
+@interface LTInfiniteScrollView: UIView
+@property (nonatomic, readonly) NSInteger currentIndex;
+@property (nonatomic, weak) id<LTInfiniteScrollViewDataSource> dataSource;
+@property (nonatomic, weak) id<LTInfiniteScrollViewDelegate> delegate;
 @property (nonatomic) BOOL verticalScroll;
 @property (nonatomic) BOOL scrollEnabled;
 @property (nonatomic) BOOL pagingEnabled;
-@property (nonatomic) NSInteger maxScrollDistance; 
+@property (nonatomic) BOOL bounces;
+@property (nonatomic) UIEdgeInsets contentInset;
+@property (nonatomic) NSInteger maxScrollDistance;
 
 - (void)reloadDataWithInitialIndex:(NSInteger)initialIndex;
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated;
@@ -85,7 +87,7 @@ Sample code:
 
 If you want to apply any animation during scrolling, implement `LTInfiniteScrollViewDelegate` protocol: 
 ```objective-c
-@protocol LTInfiniteScrollViewDelegate <NSObject>
+@protocol LTInfiniteScrollViewDelegate<NSObject>
 - (void)updateView:(UIView *)view withProgress:(CGFloat)progress scrollDirection:(ScrollDirection)direction;
 @end
 ```

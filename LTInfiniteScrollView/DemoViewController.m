@@ -38,7 +38,6 @@
     [super viewWillAppear:animated];
     self.viewSize = CGRectGetWidth(self.view.bounds) / NUMBER_OF_VISIBLE_VIEWS;
     [self.scrollView reloadDataWithInitialIndex:0];
-//    [self.scrollView scrollToIndex:10 animated:YES];
 }
 
 # pragma mark - IBAction
@@ -67,7 +66,6 @@
 - (UIView *)viewAtIndex:(NSInteger)index reusingView:(UIView *)view;
 {
     if (view) {
-        NSLog(@"%ld", (long)index);
         ((UILabel *)view).text = [NSString stringWithFormat:@"%ld", index];
         return view;
     }
@@ -135,6 +133,11 @@
 
     view.layer.transform = transform;
         
+}
+
+- (void)scrollView:(LTInfiniteScrollView *)scrollView didScrollToIndex:(NSInteger)index
+{
+    NSLog(@"scroll to: %ld", index);
 }
 
 # pragma mark - config views

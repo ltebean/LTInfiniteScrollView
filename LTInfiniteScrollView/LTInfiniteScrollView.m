@@ -193,8 +193,12 @@
 
 - (void)updateProgress
 {
+    if (![self.delegate respondsToSelector:@selector(updateView:withProgress:scrollDirection:)]) {
+        return;
+    }
     CGFloat center = [self currentCenter];
-    for (UIView *view in [self allViews]) {
+    NSArray *allViews = [self allViews];
+    for (UIView *view in allViews) {
         CGFloat progress;
         if (self.verticalScroll) {
             progress = (view.center.y - center) / CGRectGetHeight(self.bounds) * self.visibleViewCount;
@@ -202,6 +206,13 @@
             progress = (view.center.x - center) / CGRectGetWidth(self.bounds) * self.visibleViewCount;
         }
         [self.delegate updateView:view withProgress:progress scrollDirection:self.scrollDirection];
+    }
+}
+
+- (void)didScrollToIndex:(NSInteger)index
+{
+    if ([self.delegate respondsToSelector:@selector(scrollView:didScrollToIndex:)]) {
+        [self.delegate scrollView:self didScrollToIndex:self.currentIndex];
     }
 }
 
@@ -231,6 +242,7 @@
             return;
         }
         [self.scrollView setContentOffset:[self contentOffsetForIndex:self.currentIndex] animated:YES];
+        [self didScrollToIndex:self.currentIndex];
     }
 }
 
@@ -239,6 +251,7 @@
     if (!self.pagingEnabled && self.needsCenterPage) {
         [self.scrollView setContentOffset:[self contentOffsetForIndex:self.currentIndex] animated:YES];
     }
+    [self didScrollToIndex:self.currentIndex];
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
