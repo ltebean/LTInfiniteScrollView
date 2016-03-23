@@ -91,7 +91,7 @@ If you want to apply any animation during scrolling, implement `LTInfiniteScroll
 - (void)updateView:(UIView *)view withProgress:(CGFloat)progress scrollDirection:(ScrollDirection)direction;
 @end
 ```
-The value of progress dependends on the position of that view, if there are 5 visible views, the value will be ranged from -2 to 2:
+The value of progress indicates the relative position of that view, if there are 5 visible views, the value will be ranged from -2 to 2:
 ```
 |                  |
 |-2  -1   0   1   2|
