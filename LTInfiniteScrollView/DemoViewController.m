@@ -14,7 +14,8 @@
 #define NUMBER_OF_VISIBLE_VIEWS 5
 
 @interface DemoViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
-@property (nonatomic,strong) LTInfiniteScrollView *scrollView;
+
+@property (weak, nonatomic) IBOutlet LTInfiniteScrollView *scrollView;
 @property (nonatomic) CGFloat viewSize;
 @end
 
@@ -23,8 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-        
-    self.scrollView = [[LTInfiniteScrollView alloc] initWithFrame:CGRectMake(0, 200, [UIScreen mainScreen].bounds.size.width, 200)];
     self.scrollView.verticalScroll = NO;
     [self.view addSubview:self.scrollView];
     //self.scrollView.delegate = self;

@@ -70,6 +70,21 @@
     [self addSubview:self.scrollView];
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.scrollView.frame = self.bounds;
+    NSInteger index = self.currentIndex;
+    [self updateSize];
+    if (self.views.count == 0) {
+        return;
+    }
+    for (UIView *view in self.views.allValues) {
+        view.center = [self centerForViewAtIndex:view.tag];
+    }
+    [self scrollToIndex:index animated:NO];
+}
+
 #pragma mark - public methods
 
 - (void)setPagingEnabled:(BOOL)pagingEnabled

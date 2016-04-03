@@ -10,16 +10,15 @@
 #import "LTInfiniteScrollView.h"
 
 @interface VerticalScrollViewController ()<LTInfiniteScrollViewDelegate,LTInfiniteScrollViewDataSource>
-@property (nonatomic,strong) LTInfiniteScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet LTInfiniteScrollView *scrollView;
+
 @end
 
 @implementation VerticalScrollViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.scrollView = [[LTInfiniteScrollView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.view.bounds.size.height)];
     self.scrollView.verticalScroll = YES;
-    [self.view addSubview:self.scrollView];
     self.scrollView.delegate = self;
     self.scrollView.dataSource = self;
     self.scrollView.maxScrollDistance = 3;
