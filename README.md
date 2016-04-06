@@ -49,7 +49,7 @@ Sample code:
 - (UIView *)viewAtIndex:(NSInteger)index reusingView:(UIView *)view;
 {
     if (view) {
-        ((UILabel*)view).text = [NSString stringWithFormat:@"%ld", index];
+        ((UILabel *)view).text = [NSString stringWithFormat:@"%ld", index];
         return view;
     }
     
@@ -65,7 +65,7 @@ Sample code:
 }
 ```
 
-`LTInfinitedScrollView` interface:
+`LTInfiniteScrollView` interface:
 ```objective-c
 @interface LTInfiniteScrollView: UIView
 @property (nonatomic, readonly) NSInteger currentIndex;
